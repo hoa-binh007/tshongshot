@@ -5,25 +5,25 @@ i18n.use(initReactI18next).init({
   resources: {
     de: {
       translation: {
-        "prep_title": "Zubereitung",
-        "prep_hot": "Heißgetränk",
-        "prep_cold": "Kaltgetränk",
+        "preparation.hot_title": "Heißgetränk Zubereitung",
+        "preparation.cold_title": "Kaltgetränk Zubereitung",
+        "Zubereitung": "Zubereitung",
         "faq_title": "Häufig gestellte Fragen"
       }
     },
     en: {
       translation: {
-        "prep_title": "Preparation",
-        "prep_hot": "Hot Drink",
-        "prep_cold": "Cold Drink",
+        "preparation.hot_title": "Hot Drink Preparation",
+        "preparation.cold_title": "Cold Drink Preparation",
+        "Zubereitung": "Preparation",
         "faq_title": "Frequently Asked Questions"
       }
     },
     vi: {
       translation: {
-        "prep_title": "Cách pha chế",
-        "prep_hot": "Uống nóng",
-        "prep_cold": "Uống lạnh",
+        "preparation.hot_title": "Cách pha chế nóng",
+        "preparation.cold_title": "Cách pha chế lạnh",
+        "Zubereitung": "Cách pha chế",
         "faq_title": "Câu hỏi thường gặp"
       }
     }
