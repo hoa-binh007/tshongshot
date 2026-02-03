@@ -1,0 +1,24 @@
+:root{
+  --ginseng-red: #D82B50;
+  --ginseng-bordeaux: #A62761;
+  --paper: #EDBCB4;
+  --paper-2: #E9AD9B;
+  --cream: #F7DBD9;
+  --ink: #25171D;
+
+  /* UI Tokens */
+  --bg: var(--paper);
+  --surface: var(--cream);
+  --surface-2: var(--paper-2);
+
+  --text: var(--ink);
+  --muted: rgba(37, 23, 29, 0.72);
+
+  --primary: var(--ginseng-red);
+  --primary-hover: var(--ginseng-bordeaux);
+
+  --border: rgba(37, 23, 29, 0.18);
+  --shadow: 0 14px 36px rgba(37, 23, 29, 0.12);
+
+  --radius: 18px;
+}

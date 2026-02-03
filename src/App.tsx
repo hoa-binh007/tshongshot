@@ -1,25 +1,26 @@
-import "./App.css";
-import { useTranslation } from "react-i18next";
-import Preparation from "./components/Preparation";
-import FAQ from "./components/FAQ";
-
 export default function App() {
-  const { t, i18n } = useTranslation();
-
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: 24 }}>
-      <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
-        <button onClick={() => i18n.changeLanguage("de")}>DE</button>
-        <button onClick={() => i18n.changeLanguage("en")}>EN</button>
-        <button onClick={() => i18n.changeLanguage("vi")}>VI</button>
+    <div className="section">
+      <div className="container">
+        <h1 className="sectionTitle">Hong Shot – Korean Red Ginseng als Getränk</h1>
+        <p className="muted">Dein tägliches Ritual: warm oder iced – in Sekunden zubereitet.</p>
+
+        <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
+          <button className="btn btn-primary">Interesse / Bestellung</button>
+          <button className="btn btn-ghost">Mehr erfahren</button>
+        </div>
+
+        <div style={{ marginTop: 28 }} className="grid grid-3">
+          <div className="card cardPad">Traditionelle Wurzel / Ritual</div>
+          <div className="card cardPad">Mild / warm im Geschmack</div>
+          <div className="card cardPad">Kapsel → Getränk in Sekunden</div>
+        </div>
+
+        <div style={{ marginTop: 28 }} className="faqItem">
+          <div className="faqQ">Was ist drin?</div>
+          <div className="faqA">Korean Red Ginseng (Details später je nach Zutatenliste).</div>
+        </div>
       </div>
-
-      <h1>{t("title")}</h1>
-      <p>{t("subtitle")}</p>
-      <p style={{ opacity: 0.6 }}>{t("longJaverty")}</p>
-
-      <Preparation />
-      <FAQ />
     </div>
-  );
+  )
 }
