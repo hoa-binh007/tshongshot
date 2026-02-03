@@ -1,15 +1,16 @@
+import "./App.css";
 import Preparation from "./components/Preparation";
 import FAQ from "./components/FAQ";
 
-function App() {
+export default function App() {
   return (
-    <>
-      {/* Hero kommt hier */}
+    <div style={{ maxWidth: 980, margin: "0 auto", padding: 24 }}>
+      <h1>TS Hong Shot</h1>
+      <p>Ginseng Kapseln – Pilot & Feedback.</p>
+
       <Preparation />
       <FAQ />
-      {/* CTA kommt danach */}
-    </>
+    </div>
   );
 }
 
-export default App;
