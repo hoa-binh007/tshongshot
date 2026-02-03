@@ -4,13 +4,14 @@ export default function Preparation() {
   const { t } = useTranslation();
 
   return (
-    <section style={{ marginTop: 32 }}>
-      <h2>{t("prep_title")}</h2>
+    <section style={{ marginTop: 28 }}>
+      <h2 style={{ marginBottom: 12 }}>{t("prep_title")}</h2>
 
-      <ul>
-        <li>{t("prep_hot")}</li>
-        <li>{t("prep_cold")}</li>
+      <ul style={{ listStyle: "none", padding: 0, margin: 0, lineHeight: 1.8 }}>
+        <li>• {t("prep_hot")}</li>
+        <li>• {t("prep_cold")}</li>
       </ul>
     </section>
   );
 }
+
