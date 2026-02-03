@@ -216,4 +216,91 @@ a:hover {
   font-weight: 800;
 }
 
+/* ========== Navbar ========== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 12px 0;
+  background: rgba(237, 188, 180, 0.72);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(37, 23, 29, 0.10);
+}
+
+.navbarInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.navLinks {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navLinks a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 800;
+  padding: 8px 10px;
+  border-radius: 999px;
+}
+
+.navLinks a:hover {
+  background: rgba(255, 255, 255, 0.22);
+  text-decoration: none;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.langSwitch {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.18);
+}
+
+.langBtn {
+  border: 0;
+  background: transparent;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.langBtn:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+.langBtnActive {
+  background: rgba(216, 43, 80, 0.18);
+  color: var(--text);
+}
+
+/* Mobile: Nav links weg / später Burger */
+@media (max-width: 900px) {
+  .navLinks {
+    display: none;
+  }
+}
+
+
 }
