@@ -6,7 +6,6 @@ import "./theme.css";
 import "./App.css";
 import "./i18n";
 
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App />
