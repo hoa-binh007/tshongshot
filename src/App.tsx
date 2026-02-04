@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 function scrollToId(id: string) {
   const el = document.getElementById(id);
@@ -7,15 +7,46 @@ function scrollToId(id: string) {
   el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+type Lang = "de" | "vi" | "en";
+type SectionId = "product" | "brew" | "ingredients" | "unboxing" | "faq" | "contact";
+
 export default function App() {
   const { t, i18n } = useTranslation();
-  const lang = (i18n.language || "de") as "de" | "vi" | "en";
+  const lang = (i18n.language || "de") as Lang;
 
-  const setLang = (next: "de" | "vi" | "en") => {
+  const setLang = (next: Lang) => {
     i18n.changeLanguage(next);
   };
 
-  // Prep video: autoplay only when section is visible
+  // Active section (scrollspy)
+  const [activeId, setActiveId] = useState<SectionId>("product");
+
+  const sections = useMemo(
+    () =>
+      [
+        {
+          id: "product" as const,
+          label: lang === "de" ? "Produkt" : lang === "vi" ? "Sản phẩm" : "Product",
+        },
+        { id: "brew" as const, label: t("prep_title") },
+        {
+          id: "ingredients" as const,
+          label: lang === "de" ? "Inhaltsstoffe" : lang === "vi" ? "Thành phần" : "Ingredients",
+        },
+        {
+          id: "unboxing" as const,
+          label: lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing",
+        },
+        { id: "faq" as const, label: t("faq_title") },
+        {
+          id: "contact" as const,
+          label: lang === "de" ? "Kontakt" : lang === "vi" ? "Liên hệ" : "Contact",
+        },
+      ] as const,
+    [lang, t]
+  );
+
+  // Prep video: autoplay only when visible
   const prepVideoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
@@ -40,6 +71,40 @@ export default function App() {
     return () => io.disconnect();
   }, []);
 
+  // Scrollspy for sections
+  useEffect(() => {
+    const ids = sections.map((s) => s.id);
+
+    const elements = ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
+
+    if (!elements.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        // pick the most visible entry
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0))[0];
+
+        if (!visible?.target?.id) return;
+
+        const id = visible.target.id as SectionId;
+        if (ids.includes(id)) setActiveId(id);
+      },
+      {
+        // tuned so section becomes active when it's meaningfully in view
+        root: null,
+        threshold: [0.2, 0.35, 0.5, 0.65],
+        rootMargin: "-20% 0px -65% 0px",
+      }
+    );
+
+    elements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [sections]);
+
   return (
     <main>
       {/* NAVBAR */}
@@ -55,56 +120,20 @@ export default function App() {
               HONG SHOT
             </div>
 
-            <nav className="navLinks">
-              <a
-                href="#product"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToId("product");
-                }}
-              >
-                {lang === "de" ? "Produkt" : lang === "vi" ? "Sản phẩm" : "Product"}
-              </a>
-
-              <a
-                href="#brew"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToId("brew");
-                }}
-              >
-                {t("prep_title")}
-              </a>
-
-              <a
-                href="#ingredients"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToId("ingredients");
-                }}
-              >
-                {lang === "de" ? "Inhaltsstoffe" : lang === "vi" ? "Thành phần" : "Ingredients"}
-              </a>
-
-              <a
-                href="#faq"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToId("faq");
-                }}
-              >
-                {t("faq_title")}
-              </a>
-
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToId("contact");
-                }}
-              >
-                {lang === "de" ? "Kontakt" : lang === "vi" ? "Liên hệ" : "Contact"}
-              </a>
+            <nav className="navLinks" aria-label="Main navigation">
+              {sections.map((s) => (
+                <a
+                  key={s.id}
+                  href={`#${s.id}`}
+                  className={`navLink ${activeId === s.id ? "navLinkActive" : ""}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToId(s.id);
+                  }}
+                >
+                  {s.label}
+                </a>
+              ))}
             </nav>
 
             <div className="navRight">
@@ -286,7 +315,7 @@ export default function App() {
           <h2 className="sectionTitle">{lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}</h2>
 
           <div className="card cardPad">
-            <video className="video" src="/media/unboxing.mp4" controls playsInline preload="metadata" />
+            <video className="video" src="/media/optimized/unboxing.mp4" controls playsInline preload="metadata" />
             <div className="muted" style={{ marginTop: 10 }}>
               {lang === "de"
                 ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."

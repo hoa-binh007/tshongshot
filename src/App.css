@@ -15,6 +15,11 @@ body {
   text-align: left;
 }
 
+/* Sticky navbar offset for anchor scrolling */
+#top { scroll-margin-top: 92px; }
+section[id] { scroll-margin-top: 92px; }
+
+/* Links */
 a { color: var(--primary); text-decoration: none; }
 a:hover { color: var(--primary-hover); text-decoration: underline; }
 
@@ -81,8 +86,12 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 14px 16px;
+  transition: border-color .16s ease, transform .12s ease;
 }
-.faqItem:hover { border-color: rgba(166, 39, 97, 0.35); }
+.faqItem:hover {
+  border-color: rgba(166, 39, 97, 0.35);
+  transform: translateY(-1px);
+}
 .faqQ { font-weight: 900; }
 .faqA { color: var(--muted); margin-top: 10px; line-height: 1.55; }
 
@@ -177,16 +186,28 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   text-transform: uppercase;
 }
 
-.navLinks { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.navLinks { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 
-.navLinks a {
+.navLink {
   color: var(--text);
   text-decoration: none;
   font-weight: 800;
   padding: 8px 10px;
   border-radius: 999px;
+  position: relative;
+  transition: background .16s ease, transform .12s ease;
 }
-.navLinks a:hover { background: rgba(255, 255, 255, 0.22); text-decoration: none; }
+
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.22);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.navLinkActive {
+  background: rgba(216, 43, 80, 0.14);
+  border: 1px solid rgba(216, 43, 80, 0.22);
+}
 
 .navRight { display: flex; align-items: center; gap: 10px; }
 
