@@ -153,13 +153,75 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   display: block;
 }
 
+/* Video */
 .video {
   width: 100%;
   border-radius: 14px;
   display: block;
+  background: transparent;
+}
+
+/* Wrapper: Poster + Video exakt übereinander */
+.videoFrame {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
   background: #000;
 }
 
+/* ✅ NEW: klickbares Poster-Overlay als Button */
+.videoPosterBtn {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+}
+
+.videoPosterBtn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ✅ NEW: sichtbares Play-Icon */
+.videoPlayIcon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 64px;
+  color: #fff;
+  background: rgba(0,0,0,0.28);
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.videoPosterBtn:hover .videoPlayIcon {
+  background: rgba(0,0,0,0.40);
+  transform: scale(1.02);
+}
+
+/* Wenn du später per class ausblendest */
+.videoPosterHidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+/* Video sitzt unter dem Poster */
+.videoFrame .video {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* Navbar */
 .navbar {

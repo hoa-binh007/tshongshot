@@ -46,30 +46,23 @@ export default function App() {
     [lang, t]
   );
 
-  // Prep video: autoplay only when visible
+  // Prep video: should NOT autoplay (user controlled)
   const prepVideoRef = useRef<HTMLVideoElement | null>(null);
 
+  // IMPORTANT: keep poster overlay until first play frame is ready
+  const [prepReady, setPrepReady] = useState(false);
+
+  // Reset poster overlay when language changes (safe default)
   useEffect(() => {
+    setPrepReady(false);
     const el = prepVideoRef.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        const e = entries[0];
-        if (!e) return;
-
-        if (e.isIntersecting) {
-          el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
-      },
-      { threshold: 0.35 }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+    if (el) {
+      try {
+        el.pause();
+        el.currentTime = 0;
+      } catch {}
+    }
+  }, [lang]);
 
   // Scrollspy for sections
   useEffect(() => {
@@ -83,7 +76,6 @@ export default function App() {
 
     const io = new IntersectionObserver(
       (entries) => {
-        // pick the most visible entry
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0))[0];
@@ -94,8 +86,6 @@ export default function App() {
         if (ids.includes(id)) setActiveId(id);
       },
       {
-        // tuned so section becomes active when it's meaningfully in view
-        root: null,
         threshold: [0.2, 0.35, 0.5, 0.65],
         rootMargin: "-20% 0px -65% 0px",
       }
@@ -104,6 +94,19 @@ export default function App() {
     elements.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, [sections]);
+
+  // ✅ NEW: user-click play helper (tiny + isolated)
+  const startPrepVideo = async () => {
+    const el = prepVideoRef.current;
+    if (!el) return;
+    try {
+      await el.play();
+      setPrepReady(true);
+    } catch {
+      // If autoplay/play is blocked (rare on click), keep poster
+      setPrepReady(false);
+    }
+  };
 
   return (
     <main>
@@ -271,17 +274,37 @@ export default function App() {
             </div>
           </div>
 
+          {/* Prep video (user controlled, no autoplay) */}
           <div style={{ marginTop: 16 }} className="card cardPad">
-            <video
-              ref={prepVideoRef}
-              className="video"
-              src="/media/prep-extraction.mp4"
-              poster="/media/poster-prep.jpg"
-              muted
-              loop
-              playsInline
-              preload="auto"
-            />
+            <div className="videoFrame">
+              {/* ✅ CHANGED: Poster ist jetzt ein klickbares Overlay mit Play-Icon */}
+              <button
+                type="button"
+                className={`videoPosterBtn ${prepReady ? "videoPosterHidden" : ""}`}
+                onClick={startPrepVideo}
+                aria-label="Play preparation video"
+              >
+                <img src="/media/poster-prep.jpg" alt="Preparation preview" loading="eager" />
+                <span className="videoPlayIcon" aria-hidden="true">▶</span>
+              </button>
+
+              <video
+                ref={prepVideoRef}
+                className="video"
+                src="/media/prep-extraction.mp4"
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                controls
+                // ✅ Poster weg sobald User wirklich spielt
+                onPlay={() => setPrepReady(true)}
+                onPlaying={() => setPrepReady(true)}
+                // ✅ Poster wieder da, wenn User stoppt
+                onPause={() => setPrepReady(false)}
+                onEnded={() => setPrepReady(false)}
+              />
+            </div>
 
             <div className="muted" style={{ marginTop: 10 }}>
               {lang === "de"
