@@ -181,18 +181,20 @@ export default function App() {
             <div>
               <h1 className="heroTitle">
                 {lang === "de"
-                  ? "Hong Shot – Korean Red Ginseng als Getränk"
+                  ? "Hong Shot – 100% Pure Korea Red Ginseng Capsule"
                   : lang === "vi"
-                  ? "Hong Shot – Hồng sâm Hàn Quốc dạng thức uống"
-                  : "Hong Shot – Korean Red Ginseng as a drink"}
+                  ? "Hong Shot – Viên nang Hồng Sâm Hàn Quốc 100% nguyên chất"
+                  : "Hong Shot – 100% Pure Korean Red Ginseng Capsule"}
+
               </h1>
 
               <p className="heroLead">
                 {lang === "de"
-                  ? "Dein tägliches Ritual: warm oder iced – in Sekunden zubereitet."
+                  ? "Kompatibel mit dem Nescafé Dolce Gusto® System. Warm oder iced – in Sekunden zubereitet."
                   : lang === "vi"
-                  ? "Thói quen mỗi ngày: uống nóng hoặc lạnh – pha nhanh trong vài giây."
-                  : "A simple daily ritual: hot or iced – ready in seconds."}
+                  ? "Tương thích với máy Nescafé Dolce Gusto®. Uống nóng hoặc lạnh – pha nhanh trong vài giây."
+                  : "Compatible with the Nescafé Dolce Gusto® system. Hot or iced – ready in seconds."}
+
               </p>
 
               <div className="heroActions">
@@ -212,21 +214,14 @@ export default function App() {
               <div className="heroBadges">
                 <div className="badgeRow">
                   <div className="badge">
-                    {lang === "de"
-                      ? "Traditionelle Wurzel / Ritual"
-                      : lang === "vi"
-                      ? "Thói quen / truyền thống"
-                      : "Tradition / daily ritual"}
+                    {lang === "de" ? "6-jähriger roter Ginseng" : lang === "vi" ? "Hồng sâm 6 năm tuổi" : "6-year grown red ginseng"}
+
                   </div>
                   <div className="badge">
-                    {lang === "de" ? "Mild / warm im Geschmack" : lang === "vi" ? "Vị dịu / ấm" : "Mild, warm taste"}
+                    {lang === "de" ? "10 Kapseln × 1,5 g (15 g)" : lang === "vi" ? "10 viên × 1,5 g (15 g)" : "10 capsules × 1.5 g (15 g)"}
                   </div>
                   <div className="badge">
-                    {lang === "de"
-                      ? "Kapsel → Getränk in Sekunden"
-                      : lang === "vi"
-                      ? "Viên nang → thức uống trong vài giây"
-                      : "Capsule → drink in seconds"}
+                    {lang === "de" ? "HACCP-zertifiziert" : lang === "vi" ? "Chuẩn an toàn HACCP" : "HACCP certified"}
                   </div>
                 </div>
               </div>
@@ -274,6 +269,56 @@ export default function App() {
             </div>
           </div>
 
+          <div className="barsWrap">
+            <div className="card barsCard">
+              <div className="barsLine">
+                <div>
+                  <div className="barsLabel">{lang === "de" ? "Heiß" : lang === "vi" ? "Nóng" : "Hot"}</div>
+                  <div className="muted" style={{ marginTop: 4 }}>
+                    {lang === "de" ? "Dolce Gusto: 4 Balken" : lang === "vi" ? "Dolce Gusto: 4 vạch" : "Dolce Gusto: 4 bars"}
+                  </div>
+                </div>
+                <div style={{ display: "grid", gap: 8, justifyItems: "end" }}>
+                  <div className="bars">
+                    {Array.from({ length: 7 }).map((_, i) => (
+                      <span key={i} className={`barDot ${i < 4 ? "on" : ""}`} />
+                    ))}
+                  </div>
+                  <div className="barsMl">{lang === "de" ? "ca. 140 ml" : lang === "vi" ? "khoảng 140 ml" : "approx. 140 ml"}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="card barsCard">
+              <div className="barsLine">
+                <div>
+                  <div className="barsLabel">{lang === "de" ? "Kalt" : lang === "vi" ? "Lạnh" : "Cold"}</div>
+                  <div className="muted" style={{ marginTop: 4 }}>
+                    {lang === "de" ? "Dolce Gusto: 3 Balken + ⅔ Eis" : lang === "vi" ? "Dolce Gusto: 3 vạch + ⅔ đá" : "Dolce Gusto: 3 bars + ⅔ ice"}
+                  </div>
+                </div>
+                <div style={{ display: "grid", gap: 8, justifyItems: "end" }}>
+                  <div className="bars">
+                    {Array.from({ length: 7 }).map((_, i) => (
+                      <span key={i} className={`barDot ${i < 3 ? "on" : ""}`} />
+                    ))}
+                  </div>
+                  <div className="barsMl">{lang === "de" ? "ca. 100 ml" : lang === "vi" ? "khoảng 100 ml" : "approx. 100 ml"}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="smallNote">
+            {lang === "de"
+              ? "Hinweis: Auch für kalte Getränke wird die Extraktion mit heißem Wasser empfohlen."
+              : lang === "vi"
+              ? "Gợi ý: Ngay cả khi uống lạnh, vẫn nên chiết xuất bằng nước nóng trước."
+              : "Note: Even for cold drinks, extraction with hot water is recommended."}
+          </div>
+
+
+
           {/* Prep video (user controlled, no autoplay) */}
           <div style={{ marginTop: 16 }} className="card cardPad">
             <div className="videoFrame">
@@ -318,36 +363,78 @@ export default function App() {
       </section>
 
       {/* INGREDIENTS */}
-      <section className="section" id="ingredients">
-        <div className="container">
-          <h2 className="sectionTitle">{lang === "de" ? "Inhaltsstoffe" : lang === "vi" ? "Thành phần" : "Ingredients"}</h2>
+        <section className="section" id="ingredients">
+          <div className="container">
+            <h2 className="sectionTitle">
+              {lang === "de" ? "Inhaltsstoffe" : lang === "vi" ? "Thành phần" : "Ingredients"}
+            </h2>
 
-          <div className="card cardPad">
-            <div className="muted">
-              {lang === "de"
-                ? "Platzhalter – hier später sauber nach Zutatenliste."
-                : lang === "vi"
-                ? "Chỗ này sẽ cập nhật theo danh sách thành phần."
-                : "Placeholder – later based on the ingredient list."}
+            <div className="ingGrid">
+              <div className="card cardPad ingCard">
+                <div className="ingTitle">
+                  {lang === "de" ? "Zutaten" : lang === "vi" ? "Thành phần" : "Ingredients"}
+                </div>
+
+                <ul className="ingList">
+                  <li>
+                    {lang === "de"
+                      ? "100% Red Ginseng Pulver (Panax Ginseng C.A. Meyer)"
+                      : lang === "vi"
+                      ? "100% bột hồng sâm (Panax Ginseng C.A. Meyer)"
+                      : "100% Red Ginseng powder (Panax Ginseng C.A. Meyer)"}
+                  </li>
+                  <li>
+                    {lang === "de"
+                      ? "Ginsenoside: 70 mg/g"
+                      : lang === "vi"
+                      ? "Hàm lượng ginsenoside: 70 mg/g"
+                      : "Ginsenosides: 70 mg/g"}
+                  </li>
+                </ul>
+
+                <div className="smallNote">
+                  {lang === "de"
+                    ? "Nahrungsergänzungsmittel / Getränk. Kein Arzneimittel. Kein Heilversprechen."
+                    : lang === "vi"
+                    ? "Sản phẩm dinh dưỡng / đồ uống. Không phải thuốc."
+                    : "Food supplement / beverage product. Not a medicine."}
+                </div>
+              </div>
+
+              <div className="card cardPad ingCard">
+                <div className="ingTitle">
+                  {lang === "de" ? "Produktdetails" : lang === "vi" ? "Thông tin sản phẩm" : "Product details"}
+                </div>
+
+                <ul className="ingList">
+                  <li>{lang === "de" ? "6-jähriger roter Ginseng" : lang === "vi" ? "Hồng sâm 6 năm tuổi" : "6-year grown red ginseng"}</li>
+                  <li>{lang === "de" ? "10 Kapseln × 1,5 g (15 g)" : lang === "vi" ? "10 viên × 1,5 g (15 g)" : "10 capsules × 1.5 g (15 g)"}</li>
+                  <li>{lang === "de" ? "Kompatibel: Nescafé Dolce Gusto®" : lang === "vi" ? "Tương thích: Nescafé Dolce Gusto®" : "Compatible: Nescafé Dolce Gusto®"}</li>
+                  <li>{lang === "de" ? "HACCP-zertifizierter Standard" : lang === "vi" ? "Tiêu chuẩn HACCP" : "HACCP certified standard"}</li>
+                  <li>{lang === "de" ? "Mindestens haltbar bis: 23.11.2028" : lang === "vi" ? "Hạn sử dụng: 23.11.2028" : "Best before: 23 Nov 2028"}</li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* UNBOXING */}
       <section className="section" id="unboxing">
         <div className="container">
           <h2 className="sectionTitle">{lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}</h2>
 
-          <div className="card cardPad">
-            <video
-              className="video"
-              src="/media/optimized/unboxing.mp4"
-              poster="/media/poster-unboxing.jpg"
-              controls
-              playsInline
-              preload="metadata"
-            />
+          <div className="card ingCard">
+            <div className="videoFrame">
+              <video
+                className="video"
+                src="/media/optimized/unboxing.mp4"
+                poster="/media/poster-unboxing.jpg"
+                controls
+                playsInline
+                preload="metadata"
+              />
+            </div>
+
 
             <div className="muted" style={{ marginTop: 10 }}>
               {lang === "de"
@@ -361,37 +448,52 @@ export default function App() {
       </section>
 
       {/* FAQ */}
-      <section className="section" id="faq">
-        <div className="container">
-          <h2 className="sectionTitle">{t("faq_title")}</h2>
+        <section className="section" id="faq">
+          <div className="container">
+            <h2 className="sectionTitle">{t("faq_title")}</h2>
 
-          <div className="faqItem">
-            <div className="faqQ">{t("faq_q1")}</div>
-            <div className="faqA">{t("faq_a1")}</div>
+            <div className="faqItem">
+              <div className="faqQ">{t("faq_q1")}</div>
+              <div className="faqA">{t("faq_a1")}</div>
+            </div>
+
+            <div style={{ height: 12 }} />
+
+            <div className="faqItem">
+              <div className="faqQ">{t("faq_q2")}</div>
+              <div className="faqA">{t("faq_a2")}</div>
+            </div>
+
+            <div style={{ height: 12 }} />
+
+            <div className="faqItem">
+              <div className="faqQ">{t("faq_q3")}</div>
+              <div className="faqA">{t("faq_a3")}</div>
+            </div>
+
+            <div style={{ height: 12 }} />
+
+            <div className="faqItem">
+              <div className="faqQ">{t("faq_q5")}</div>
+              <div className="faqA">{t("faq_a5")}</div>
+            </div>
+
+            <div style={{ height: 12 }} />
+
+            <div className="faqItem">
+              <div className="faqQ">{t("faq_q6")}</div>
+              <div className="faqA">{t("faq_a6")}</div>
+            </div>
+
+            <div style={{ height: 12 }} />
+
+            <div className="faqItem">
+              <div className="faqQ">{t("faq_q4")}</div>
+              <div className="faqA">{t("faq_a4")}</div>
+            </div>
           </div>
+        </section>
 
-          <div style={{ height: 12 }} />
-
-          <div className="faqItem">
-            <div className="faqQ">{t("faq_q2")}</div>
-            <div className="faqA">{t("faq_a2")}</div>
-          </div>
-
-          <div style={{ height: 12 }} />
-
-          <div className="faqItem">
-            <div className="faqQ">{t("faq_q3")}</div>
-            <div className="faqA">{t("faq_a3")}</div>
-          </div>
-
-          <div style={{ height: 12 }} />
-
-          <div className="faqItem">
-            <div className="faqQ">{t("faq_q4")}</div>
-            <div className="faqA">{t("faq_a4")}</div>
-          </div>
-        </div>
-      </section>
 
       {/* CONTACT */}
       <section className="section" id="contact">

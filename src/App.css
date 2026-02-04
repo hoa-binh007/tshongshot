@@ -23,8 +23,10 @@ section[id] { scroll-margin-top: 92px; }
 a { color: var(--primary); text-decoration: none; }
 a:hover { color: var(--primary-hover); text-decoration: underline; }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
-.section { padding: 72px 0; }
+/* ✅ compact container + section spacing */
+.container { max-width: 1040px; margin: 0 auto; padding: 0 18px; }
+.section { padding: 56px 0; }
+@media (max-width: 900px) { .section { padding: 42px 0; } }
 
 .sectionTitle {
   font-size: 34px;
@@ -35,15 +37,28 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 
 .muted { color: var(--muted); }
 
+/* ✅ prevent text overflow in cards/badges */
+.ingList,
+.faqA,
+.muted,
+.badge,
+.kvSub,
+.kvTitle {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
 /* Cards */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  max-width: 100%;
 }
 
-.cardPad { padding: 18px; }
+.cardPad { padding: 16px; }
 
 /* Buttons */
 .btn {
@@ -96,7 +111,7 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 .faqA { color: var(--muted); margin-top: 10px; line-height: 1.55; }
 
 /* Hero */
-.hero { padding: 84px 0 42px 0; }
+.hero { padding: 72px 0 34px 0; }
 
 .heroGrid {
   display: grid;
@@ -168,6 +183,22 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   border-radius: 14px;
   overflow: hidden;
   background: #000;
+
+  /* ✅ constrain size + keep nice ratio */
+  aspect-ratio: 16 / 9;
+  max-height: 60vh;
+}
+
+/* Desktop cap so it never dominates */
+@media (min-width: 900px) {
+  .videoFrame { max-height: 420px; }
+  .video { max-height: 420px; }
+}
+
+/* Mobile cap */
+@media (max-width: 600px) {
+  .videoFrame { max-height: 260px; }
+  .video { max-height: 260px; }
 }
 
 /* ✅ NEW: klickbares Poster-Overlay als Button */
@@ -295,3 +326,121 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 .langBtnActive { background: rgba(216, 43, 80, 0.18); }
 
 @media (max-width: 900px) { .navLinks { display: none; } }
+
+/* --- Quality badges (icons / mini badges) --- */
+.kvRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.kv {
+  display: inline-flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: rgba(255,255,255,0.22);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 10px 12px;
+}
+
+.kvIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(216, 43, 80, 0.12);
+  border: 1px solid rgba(216, 43, 80, 0.18);
+  font-weight: 900;
+}
+
+.kvTitle { font-weight: 900; line-height: 1.2; }
+.kvSub { color: var(--muted); font-size: 13px; margin-top: 3px; }
+
+/* --- Dolce Gusto bar indicators --- */
+.barsWrap {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.barsCard {
+  flex: 1 1 260px;
+  padding: 14px 16px;
+}
+
+.barsLine {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.barsLabel { font-weight: 900; }
+.barsMl { color: var(--muted); font-weight: 800; }
+
+.bars {
+  display: inline-flex;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.barDot {
+  width: 10px;
+  height: 14px;
+  border-radius: 6px;
+  background: rgba(37, 23, 29, 0.14);
+  border: 1px solid rgba(37, 23, 29, 0.18);
+}
+
+.barDot.on {
+  background: rgba(216, 43, 80, 0.72);
+  border-color: rgba(216, 43, 80, 0.35);
+}
+
+/* --- Ingredients layout --- */
+.ingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+@media (max-width: 900px) { .ingGrid { grid-template-columns: 1fr; } }
+
+/* =========================================================
+   ✅ HARD FIX: Zutaten/Text im Ingredients-Bereich NICHT breit
+   Greift ohne App.tsx-Änderung, nur über #ingredients Scope
+   ========================================================= */
+#ingredients .card {
+  padding: 18px;
+}
+
+#ingredients .card > * {
+  max-width: 62ch;         /* ✅ Lesebreite */
+}
+
+#ingredients h3,
+#ingredients h4,
+#ingredients p,
+#ingredients ul,
+#ingredients li,
+#ingredients .muted {
+  max-width: 62ch;         /* ✅ alles begrenzen */
+}
+
+#ingredients ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+#ingredients li { margin: 6px 0; }
+
+#ingredients .muted {
+  font-size: 13px;
+}
