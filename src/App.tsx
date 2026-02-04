@@ -276,11 +276,13 @@ export default function App() {
               ref={prepVideoRef}
               className="video"
               src="/media/prep-extraction.mp4"
+              poster="/media/poster-prep.jpg"
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="auto"
             />
+
             <div className="muted" style={{ marginTop: 10 }}>
               {lang === "de"
                 ? "So sieht die Extraktion aus (Loop ohne Ton)."
@@ -315,7 +317,15 @@ export default function App() {
           <h2 className="sectionTitle">{lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}</h2>
 
           <div className="card cardPad">
-            <video className="video" src="/media/optimized/unboxing.mp4" controls playsInline preload="metadata" />
+            <video
+              className="video"
+              src="/media/optimized/unboxing.mp4"
+              poster="/media/poster-unboxing.jpg"
+              controls
+              playsInline
+              preload="metadata"
+            />
+
             <div className="muted" style={{ marginTop: 10 }}>
               {lang === "de"
                 ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."
