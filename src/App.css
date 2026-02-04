@@ -1,7 +1,5 @@
 /* ========== Base ========== */
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
 body {
   margin: 0;
@@ -11,7 +9,6 @@ body {
   line-height: 1.5;
 }
 
-/* Root nicht zentrieren wie Vite-Demo */
 #root {
   max-width: none;
   margin: 0;
@@ -19,26 +16,11 @@ body {
   text-align: left;
 }
 
-/* Links */
-a {
-  color: var(--primary);
-  text-decoration: none;
-}
-a:hover {
-  color: var(--primary-hover);
-  text-decoration: underline;
-}
+a { color: var(--primary); text-decoration: none; }
+a:hover { color: var(--primary-hover); text-decoration: underline; }
 
-/* Layout helper */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 18px;
-}
-
-.section {
-  padding: 72px 0;
-}
+.container { max-width: 1100px; margin: 0 auto; padding: 0 18px; }
+.section { padding: 72px 0; }
 
 .sectionTitle {
   font-size: 34px;
@@ -47,9 +29,7 @@ a:hover {
   letter-spacing: -0.02em;
 }
 
-.muted {
-  color: var(--muted);
-}
+.muted { color: var(--muted); }
 
 /* ========== Cards ========== */
 .card {
@@ -59,9 +39,7 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
-.cardPad {
-  padding: 18px;
-}
+.cardPad { padding: 18px; }
 
 /* ========== Buttons ========== */
 .btn {
@@ -78,39 +56,25 @@ a:hover {
   user-select: none;
 }
 
-.btn:active {
-  transform: translateY(1px);
-}
+.btn:active { transform: translateY(1px); }
 
 .btn-primary {
   background: var(--primary);
   color: #fff;
   border-color: rgba(255,255,255,0.22);
 }
-.btn-primary:hover {
-  background: var(--primary-hover);
-}
+.btn-primary:hover { background: var(--primary-hover); }
 
-.btn-ghost {
-  background: transparent;
-  color: var(--text);
-}
+.btn-ghost { background: transparent; color: var(--text); }
 .btn-ghost:hover {
   background: rgba(255,255,255,0.18);
   border-color: rgba(37, 23, 29, 0.25);
 }
 
-/* ========== Simple grid (für Benefits/FAQ Karten) ========== */
-.grid {
-  display: grid;
-  gap: 16px;
-}
-.grid-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-@media (max-width: 900px) {
-  .grid-3 { grid-template-columns: 1fr; }
-}
+/* ========== Grid ========== */
+.grid { display: grid; gap: 16px; }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr; } }
 
 /* ========== FAQ ========== */
 .faqItem {
@@ -119,25 +83,12 @@ a:hover {
   border-radius: var(--radius);
   padding: 14px 16px;
 }
-
-.faqItem:hover {
-  border-color: rgba(166, 39, 97, 0.35);
-}
-
-.faqQ {
-  font-weight: 900;
-}
-
-.faqA {
-  color: var(--muted);
-  margin-top: 10px;
-  line-height: 1.55;
-}
+.faqItem:hover { border-color: rgba(166, 39, 97, 0.35); }
+.faqQ { font-weight: 900; }
+.faqA { color: var(--muted); margin-top: 10px; line-height: 1.55; }
 
 /* ========== Hero ========== */
-.hero {
-  padding: 84px 0 42px 0;
-}
+.hero { padding: 84px 0 42px 0; }
 
 .heroGrid {
   display: grid;
@@ -145,13 +96,7 @@ a:hover {
   gap: 28px;
   align-items: center;
 }
-
-/* Breakpoint etwas später, damit auf Desktop eher 2 Spalten bleibt */
-@media (max-width: 720px) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-  }
-}
+@media (max-width: 720px) { .heroGrid { grid-template-columns: 1fr; } }
 
 .heroTitle {
   font-size: 44px;
@@ -159,10 +104,7 @@ a:hover {
   letter-spacing: -0.03em;
   margin: 0 0 14px 0;
 }
-
-@media (max-width: 900px) {
-  .heroTitle { font-size: 36px; }
-}
+@media (max-width: 900px) { .heroTitle { font-size: 36px; } }
 
 .heroLead {
   font-size: 18px;
@@ -171,23 +113,10 @@ a:hover {
   color: var(--muted);
 }
 
-.heroActions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
+.heroActions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.heroBadges { margin-top: 22px; }
 
-.heroBadges {
-  margin-top: 22px;
-}
-
-.badgeRow {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
+.badgeRow { display: flex; gap: 12px; flex-wrap: wrap; }
 .badge {
   background: rgba(255,255,255,0.22);
   border: 1px solid var(--border);
@@ -250,12 +179,7 @@ a:hover {
   text-transform: uppercase;
 }
 
-.navLinks {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  flex-wrap: wrap;
-}
+.navLinks { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
 
 .navLinks a {
   color: var(--text);
@@ -264,17 +188,9 @@ a:hover {
   padding: 8px 10px;
   border-radius: 999px;
 }
+.navLinks a:hover { background: rgba(255, 255, 255, 0.22); text-decoration: none; }
 
-.navLinks a:hover {
-  background: rgba(255, 255, 255, 0.22);
-  text-decoration: none;
-}
-
-.navRight {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.navRight { display: flex; align-items: center; gap: 10px; }
 
 .langSwitch {
   display: inline-flex;
@@ -292,19 +208,22 @@ a:hover {
   font-weight: 900;
   color: var(--text);
 }
+.langBtn:hover { background: rgba(255,255,255,0.22); }
+.langBtnActive { background: rgba(216, 43, 80, 0.18); }
 
-.langBtn:hover {
-  background: rgba(255,255,255,0.22);
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  display: block;
 }
 
-.langBtnActive {
-  background: rgba(216, 43, 80, 0.18);
-  color: var(--text);
+.video {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
 }
 
-/* Mobile: Nav links weg / später Burger */
-@media (max-width: 900px) {
-  .navLinks {
-    display: none;
-  }
-}
+
+@media (max-width: 900px) { .navLinks { display: none; } }

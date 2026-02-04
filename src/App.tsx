@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { useEffect, useRef } from "react";
 
 function scrollToId(id: string) {
   const el = document.getElementById(id);
@@ -8,11 +9,36 @@ function scrollToId(id: string) {
 
 export default function App() {
   const { t, i18n } = useTranslation();
-  const lang = i18n.language || "de";
+  const lang = (i18n.language || "de") as "de" | "vi" | "en";
 
   const setLang = (next: "de" | "vi" | "en") => {
     i18n.changeLanguage(next);
   };
+
+  // Prep video: autoplay only when section is visible
+  const prepVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const el = prepVideoRef.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        if (!e) return;
+
+        if (e.isIntersecting) {
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
+      { threshold: 0.35 }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <main>
@@ -30,19 +56,53 @@ export default function App() {
             </div>
 
             <nav className="navLinks">
-              <a href="#product" onClick={(e) => { e.preventDefault(); scrollToId("product"); }}>
+              <a
+                href="#product"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId("product");
+                }}
+              >
                 {lang === "de" ? "Produkt" : lang === "vi" ? "Sản phẩm" : "Product"}
               </a>
-              <a href="#brew" onClick={(e) => { e.preventDefault(); scrollToId("brew"); }}>
+
+              <a
+                href="#brew"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId("brew");
+                }}
+              >
                 {t("prep_title")}
               </a>
-              <a href="#ingredients" onClick={(e) => { e.preventDefault(); scrollToId("ingredients"); }}>
+
+              <a
+                href="#ingredients"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId("ingredients");
+                }}
+              >
                 {lang === "de" ? "Inhaltsstoffe" : lang === "vi" ? "Thành phần" : "Ingredients"}
               </a>
-              <a href="#faq" onClick={(e) => { e.preventDefault(); scrollToId("faq"); }}>
+
+              <a
+                href="#faq"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId("faq");
+                }}
+              >
                 {t("faq_title")}
               </a>
-              <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToId("contact"); }}>
+
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  scrollToId("contact");
+                }}
+              >
                 {lang === "de" ? "Kontakt" : lang === "vi" ? "Liên hệ" : "Contact"}
               </a>
             </nav>
@@ -128,11 +188,7 @@ export default function App() {
                       : "Tradition / daily ritual"}
                   </div>
                   <div className="badge">
-                    {lang === "de"
-                      ? "Mild / warm im Geschmack"
-                      : lang === "vi"
-                      ? "Vị dịu / ấm"
-                      : "Mild, warm taste"}
+                    {lang === "de" ? "Mild / warm im Geschmack" : lang === "vi" ? "Vị dịu / ấm" : "Mild, warm taste"}
                   </div>
                   <div className="badge">
                     {lang === "de"
@@ -154,24 +210,12 @@ export default function App() {
             </div>
 
             <div className="heroImageCard">
-              <div className="heroImagePlaceholder">
-                <div>
-                  <div style={{ fontSize: 18, marginBottom: 6 }}>
-                    {lang === "de" ? "Packshot / Produktfoto" : lang === "vi" ? "Hình sản phẩm" : "Product image"}
-                  </div>
-                  <div style={{ fontSize: 13, fontWeight: 700, opacity: 0.85 }}>
-                    {lang === "de"
-                      ? "Hier später Bild: Kapseln / Maschine / fertiges Getränk"
-                      : lang === "vi"
-                      ? "Sau này thêm ảnh: viên nang / máy / ly đã pha"
-                      : "Later: capsules / machine / prepared drink"}
-                  </div>
-                </div>
-              </div>
-
-              {/* Später echtes Bild:
-              <img src="/images/packshot.png" alt="Hong Shot Packshot" style={{ width:"100%", height:"100%", objectFit:"cover" }} />
-              */}
+              <img
+                className="heroImg"
+                src="/media/hero-capsules.jpg"
+                alt="Hong Shot capsules"
+                loading="eager"
+              />
             </div>
           </div>
         </div>
@@ -181,10 +225,17 @@ export default function App() {
       <section className="section" id="brew">
         <div className="container">
           <h2 className="sectionTitle">{t("prep_title")}</h2>
+
           <div className="grid grid-3">
-            <div className="card cardPad">{lang === "de" ? "1) Kapsel einlegen" : lang === "vi" ? "1) Cho viên nang" : "1) Insert capsule"}</div>
-            <div className="card cardPad">{lang === "de" ? "2) Extrahieren" : lang === "vi" ? "2) Chiết xuất" : "2) Extract"}</div>
-            <div className="card cardPad">{lang === "de" ? "3) Genießen" : lang === "vi" ? "3) Thưởng thức" : "3) Enjoy"}</div>
+            <div className="card cardPad">
+              {lang === "de" ? "1) Kapsel einlegen" : lang === "vi" ? "1) Cho viên nang" : "1) Insert capsule"}
+            </div>
+            <div className="card cardPad">
+              {lang === "de" ? "2) Extrahieren" : lang === "vi" ? "2) Chiết xuất" : "2) Extract"}
+            </div>
+            <div className="card cardPad">
+              {lang === "de" ? "3) Genießen" : lang === "vi" ? "3) Thưởng thức" : "3) Enjoy"}
+            </div>
           </div>
 
           <div style={{ marginTop: 16 }} className="card cardPad">
@@ -196,15 +247,34 @@ export default function App() {
                 : `Hot: ${t("prep_hot")} · Cold: ${t("prep_cold")}`}
             </div>
           </div>
+
+          {/* Prep video (autoplay when visible) */}
+          <div style={{ marginTop: 16 }} className="card cardPad">
+            <video
+              ref={prepVideoRef}
+              className="video"
+              src="/media/prep-extraction.mp4"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            />
+            <div className="muted" style={{ marginTop: 10 }}>
+              {lang === "de"
+                ? "So sieht die Extraktion aus (Loop ohne Ton)."
+                : lang === "vi"
+                ? "Video chiết xuất (lặp, không âm thanh)."
+                : "Extraction video (loop, muted)."}
+            </div>
+          </div>
         </div>
       </section>
 
       {/* INGREDIENTS */}
       <section className="section" id="ingredients">
         <div className="container">
-          <h2 className="sectionTitle">
-            {lang === "de" ? "Inhaltsstoffe" : lang === "vi" ? "Thành phần" : "Ingredients"}
-          </h2>
+          <h2 className="sectionTitle">{lang === "de" ? "Inhaltsstoffe" : lang === "vi" ? "Thành phần" : "Ingredients"}</h2>
+
           <div className="card cardPad">
             <div className="muted">
               {lang === "de"
@@ -212,6 +282,30 @@ export default function App() {
                 : lang === "vi"
                 ? "Chỗ này sẽ cập nhật theo danh sách thành phần."
                 : "Placeholder – later based on the ingredient list."}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* UNBOXING */}
+      <section className="section" id="unboxing">
+        <div className="container">
+          <h2 className="sectionTitle">{lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}</h2>
+
+          <div className="card cardPad">
+            <video
+              className="video"
+              src="/media/unboxing.mp4"
+              controls
+              playsInline
+              preload="metadata"
+            />
+            <div className="muted" style={{ marginTop: 10 }}>
+              {lang === "de"
+                ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."
+                : lang === "vi"
+                ? "Cảm giác mở hộp – bao bì & trải nghiệm sản phẩm."
+                : "A quick look at the unboxing – packaging & product feel."}
             </div>
           </div>
         </div>
@@ -253,9 +347,8 @@ export default function App() {
       {/* CONTACT */}
       <section className="section" id="contact">
         <div className="container">
-          <h2 className="sectionTitle">
-            {lang === "de" ? "Kontakt" : lang === "vi" ? "Liên hệ" : "Contact"}
-          </h2>
+          <h2 className="sectionTitle">{lang === "de" ? "Kontakt" : lang === "vi" ? "Liên hệ" : "Contact"}</h2>
+
           <div className="card cardPad">
             <div className="muted">
               {lang === "de"
