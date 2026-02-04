@@ -1,4 +1,3 @@
-/* ========== Base ========== */
 html, body { height: 100%; }
 
 body {
@@ -31,7 +30,7 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 
 .muted { color: var(--muted); }
 
-/* ========== Cards ========== */
+/* Cards */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -41,7 +40,7 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 
 .cardPad { padding: 18px; }
 
-/* ========== Buttons ========== */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -71,12 +70,12 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   border-color: rgba(37, 23, 29, 0.25);
 }
 
-/* ========== Grid ========== */
+/* Grid */
 .grid { display: grid; gap: 16px; }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr; } }
 
-/* ========== FAQ ========== */
+/* FAQ */
 .faqItem {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -87,7 +86,7 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 .faqQ { font-weight: 900; }
 .faqA { color: var(--muted); margin-top: 10px; line-height: 1.55; }
 
-/* ========== Hero ========== */
+/* Hero */
 .hero { padding: 84px 0 42px 0; }
 
 .heroGrid {
@@ -133,26 +132,25 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   box-shadow: var(--shadow);
   overflow: hidden;
   min-height: 320px;
-  display: grid;
-  place-items: center;
   padding: 18px;
 }
 
-.heroImagePlaceholder {
+.heroImg {
   width: 100%;
   height: 100%;
+  min-height: 320px;
+  object-fit: cover;
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(216,43,80,0.18), rgba(166,39,97,0.10));
-  border: 1px dashed rgba(166,39,97,0.45);
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 22px;
-  color: rgba(37,23,29,0.85);
-  font-weight: 800;
+  display: block;
 }
 
-/* ========== Navbar ========== */
+.video {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+}
+
+/* Navbar */
 .navbar {
   position: sticky;
   top: 0;
@@ -210,20 +208,5 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 }
 .langBtn:hover { background: rgba(255,255,255,0.22); }
 .langBtnActive { background: rgba(216, 43, 80, 0.18); }
-
-.heroImg {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-  display: block;
-}
-
-.video {
-  width: 100%;
-  border-radius: 14px;
-  display: block;
-}
-
 
 @media (max-width: 900px) { .navLinks { display: none; } }

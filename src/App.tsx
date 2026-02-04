@@ -140,7 +140,6 @@ export default function App() {
         </div>
       </header>
 
-      {/* TOP ANCHOR */}
       <div id="top" />
 
       {/* HERO */}
@@ -210,12 +209,7 @@ export default function App() {
             </div>
 
             <div className="heroImageCard">
-              <img
-                className="heroImg"
-                src="/media/hero-capsules.jpg"
-                alt="Hong Shot capsules"
-                loading="eager"
-              />
+              <img className="heroImg" src="/media/hero-capsules.jpg" alt="Hong Shot capsules" loading="eager" />
             </div>
           </div>
         </div>
@@ -248,7 +242,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Prep video (autoplay when visible) */}
           <div style={{ marginTop: 16 }} className="card cardPad">
             <video
               ref={prepVideoRef}
@@ -293,13 +286,7 @@ export default function App() {
           <h2 className="sectionTitle">{lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}</h2>
 
           <div className="card cardPad">
-            <video
-              className="video"
-              src="/media/unboxing.mp4"
-              controls
-              playsInline
-              preload="metadata"
-            />
+            <video className="video" src="/media/unboxing.mp4" controls playsInline preload="metadata" />
             <div className="muted" style={{ marginTop: 10 }}>
               {lang === "de"
                 ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."
