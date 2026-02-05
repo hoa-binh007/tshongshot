@@ -402,6 +402,31 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
   border-color: rgba(216, 43, 80, 0.35);
 }
 
+.sectionLead {
+  max-width: 720px;
+  margin: 0 0 18px 0;
+  opacity: 0.9;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.ctaButton:hover {
+  background: var(--primary-hover);
+  text-decoration: none;
+}
+
 /* --- Ingredients layout --- */
 .ingGrid {
   display: grid;
@@ -444,3 +469,43 @@ a:hover { color: var(--primary-hover); text-decoration: underline; }
 #ingredients .muted {
   font-size: 13px;
 }
+
+/* Footer */
+.footer {
+  padding: 24px 0;
+  border-top: 1px solid rgba(37, 23, 29, 0.10);
+  opacity: 0.95;
+}
+
+.footerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerLink {
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.footerLink:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.footerDot { opacity: 0.5; }
+
+@media (max-width: 768px) {
+  .footerInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

@@ -496,21 +496,36 @@ export default function App() {
 
 
       {/* CONTACT */}
-      <section className="section" id="contact">
+      <section id="contact" className="section">
         <div className="container">
-          <h2 className="sectionTitle">{lang === "de" ? "Kontakt" : lang === "vi" ? "Liên hệ" : "Contact"}</h2>
+          <h2 className="sectionTitle">Kontakt</h2>
+          <p className="sectionLead">
+            Du willst am Pilotprojekt teilnehmen oder Feedback geben? Schreib mir kurz per E-Mail.
+          </p>
 
-          <div className="card cardPad">
-            <div className="muted">
-              {lang === "de"
-                ? "Hier kommt gleich das Interesse-Formular rein."
-                : lang === "vi"
-                ? "Sắp có form đăng ký quan tâm."
-                : "The interest form will be added here."}
-            </div>
-          </div>
+          <a
+            className="ctaButton"
+            href="mailto:info@tshongshot.com?subject=Interesse%20an%20TS%20Hong%20Shot&body=Hallo%2C%0A%0Aich%20habe%20Interesse%20an%20TS%20Hong%20Shot.%0A%0AName%3A%0AOrt%3A%0AFragen%2FFeedback%3A%0A%0AViele%20Gr%C3%BC%C3%9Fe"
+          >
+            INTERESSE PER E-MAIL SENDEN
+          </a>
         </div>
       </section>
+
     </main>
   );
 }
+
+<footer className="footer">
+  <div className="container footerInner">
+    <div className="footerLeft">
+      © {new Date().getFullYear()} TS Hong Shot
+    </div>
+
+    <div className="footerRight">
+      <a className="footerLink" href="/impressum.html">Impressum</a>
+      <span className="footerDot">·</span>
+      <a className="footerLink" href="/datenschutz.html">Datenschutz</a>
+    </div>
+  </div>
+</footer>
