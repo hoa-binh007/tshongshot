@@ -523,9 +523,9 @@ export default function App() {
     </div>
 
     <div className="footerRight">
-      <a className="footerLink" href="/impressum.html">Impressum</a>
-      <span className="footerDot">·</span>
-      <a className="footerLink" href="/datenschutz.html">Datenschutz</a>
+     <a className="footerLink" href="/legal/impressum.html">Impressum</a>
+    <span className="footerDot">·</span>
+    <a className="footerLink" href="/legal/datenschutz.html">Datenschutz</a>
     </div>
   </div>
 </footer>
