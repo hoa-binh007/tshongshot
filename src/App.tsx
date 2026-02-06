@@ -500,34 +500,61 @@ export default function App() {
         {/* CONTACT */}
         <section id="contact" className="section">
           <div className="container">
-            <h2 className="sectionTitle">Kontakt</h2>
-            <p className="sectionLead">
-              Du willst am Pilotprojekt teilnehmen oder Feedback geben? Schreib mir kurz per E-Mail.
-            </p>
+            <h2 className="sectionTitle">{t("contact_title")}</h2>
+            <p className="sectionLead">{t("contact_lead")}</p>
 
-            <a
-              className="ctaButton"
-              href="mailto:info@tshongshot.com?subject=Interesse%20an%20TS%20Hong%20Shot&body=Hallo%2C%0A%0Aich%20habe%20Interesse%20an%20TS%20Hong%20Shot.%0A%0AName%3A%0AOrt%3A%0AFragen%2FFeedback%3A%0A%0AViele%20Gr%C3%BC%C3%9Fe"
-            >
-              INTERESSE PER E-MAIL SENDEN
-            </a>
+            {(() => {
+              const subject = encodeURIComponent(t("email_subject"));
+              const body = encodeURIComponent(t("email_body"));
+              const mailto = `mailto:info@tshongshot.com?subject=${subject}&body=${body}`;
+
+              return (
+                <a className="ctaButton" href={mailto}>
+                  {t("contact_cta")}
+                </a>
+              );
+            })()}
           </div>
         </section>
-      </main>
+        </main>
 
-      <footer className="footer">
-        <div className="container footerInner">
-          <div className="footerLeft">
-            © {new Date().getFullYear()} TS Hong Shot
-          </div>
+        <footer className="footer">
+          <div className="container footerInner">
+            <div className="footerLeft">
+              © {new Date().getFullYear()} TS Hong Shot
+            </div>
 
-          <div className="footerRight">
-            <a className="footerLink" href="/legal/impressum.html">Impressum</a>
-            <span className="footerDot">·</span>
-            <a className="footerLink" href="/legal/datenschutz.html">Datenschutz</a>
+            {(() => {
+              const lang = (i18n.language || "de").slice(0, 2);
+
+              const impressumHref =
+                lang === "en"
+                  ? "/legal/impressum.en.html"
+                  : lang === "vi"
+                  ? "/legal/impressum.vi.html"
+                  : "/legal/impressum.de.html";
+
+              const privacyHref =
+                lang === "en"
+                  ? "/legal/privacy.en.html"
+                  : lang === "vi"
+                  ? "/legal/baomat.vi.html"
+                  : "/legal/datenschutz.de.html";
+
+              return (
+                <div className="footerRight">
+                  <a className="footerLink" href={impressumHref}>
+                    {t("footer_impressum")}
+                  </a>
+                  <span className="footerDot">·</span>
+                  <a className="footerLink" href={privacyHref}>
+                    {t("footer_privacy")}
+                  </a>
+                </div>
+              );
+            })()}
           </div>
-        </div>
-      </footer>
-    </>
-  );
-}
+        </footer>
+        </>
+        );
+        }
