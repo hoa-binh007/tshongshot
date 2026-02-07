@@ -19,8 +19,7 @@ i18n.use(initReactI18next).init({
         faq_a1:
           "Orientiere dich an den Angaben auf der Verpackung. Viele starten mit 1 Kapsel pro Tag. Bei Unsicherheit oder Unverträglichkeit bitte pausieren und ggf. ärztlich abklären.",
         faq_q2: "Wann ist der beste Zeitpunkt für Hong Shot?",
-        faq_a2:
-          "Viele trinken es morgens vor dem Frühstück oder am Vormittag.",
+        faq_a2: "Viele trinken es morgens vor dem Frühstück oder am Vormittag.",
         faq_q3: "Wie bereite ich das Getränk zu?",
         faq_a3:
           "Die Kapsel wird in eine kompatible Maschine eingesetzt. Heiß: 140 ml, Kalt: 100 ml + Eis.",
@@ -42,6 +41,9 @@ i18n.use(initReactI18next).init({
         email_subject: "Interesse an TS Hong Shot",
         email_body:
           "Hallo,\n\nich habe Interesse an TS Hong Shot.\n\nName:\nOrt:\nFragen/Feedback:\n\nViele Grüße",
+
+        /* Pilot Survey Button */
+        pilot_cta: "Zum Pilotprojekt (Fragen)",
 
         /* Footer */
         footer_impressum: "Impressum",
@@ -68,8 +70,7 @@ i18n.use(initReactI18next).init({
         faq_a2:
           "Many drink it in the morning before breakfast or during the forenoon.",
         faq_q3: "How to prepare?",
-        faq_a3:
-          "Use a compatible machine. Hot: 140 ml, Cold: 100 ml + ice.",
+        faq_a3: "Use a compatible machine. Hot: 140 ml, Cold: 100 ml + ice.",
         faq_q4: "Should I take breaks?",
         faq_a4:
           "Some people take breaks after a longer period (e.g., several weeks). If unsure, follow the manufacturer’s guidance.",
@@ -88,6 +89,9 @@ i18n.use(initReactI18next).init({
         email_subject: "Interest in TS Hong Shot",
         email_body:
           "Hello,\n\nI am interested in TS Hong Shot.\n\nName:\nLocation:\nQuestions / Feedback:\n\nBest regards",
+
+        /* Pilot Survey Button */
+        pilot_cta: "Join the pilot survey",
 
         /* Footer */
         footer_impressum: "Imprint",
@@ -111,8 +115,7 @@ i18n.use(initReactI18next).init({
         faq_a1:
           "Vui lòng làm theo hướng dẫn trên bao bì. Nhiều người bắt đầu với 1 viên mỗi ngày. Nếu không chắc chắn hoặc có dấu hiệu khó chịu, nên tạm dừng và hỏi ý kiến chuyên môn.",
         faq_q2: "Thời điểm tốt nhất?",
-        faq_a2:
-          "Nhiều người dùng vào buổi sáng trước khi ăn hoặc trong buổi sáng.",
+        faq_a2: "Nhiều người dùng vào buổi sáng trước khi ăn hoặc trong buổi sáng.",
         faq_q3: "Pha chế thế nào?",
         faq_a3:
           "Dùng máy chiết xuất tương thích. Nóng: 140 ml, Lạnh: 100 ml + đá.",
@@ -135,6 +138,9 @@ i18n.use(initReactI18next).init({
         email_body:
           "Xin chào,\n\nTôi quan tâm đến TS Hong Shot.\n\nHọ tên:\nKhu vực / Thành phố:\nCâu hỏi / Góp ý:\n\nTrân trọng",
 
+        /* Pilot Survey Button */
+        pilot_cta: "Tham gia khảo sát (pilot)",
+
         /* Footer */
         footer_impressum: "Thông tin pháp lý",
         footer_privacy: "Chính sách bảo mật"
@@ -144,9 +150,7 @@ i18n.use(initReactI18next).init({
 
   lng: "de",
   fallbackLng: "en",
-  interpolation: {
-    escapeValue: false
-  }
+  interpolation: { escapeValue: false }
 });
 
 export default i18n;

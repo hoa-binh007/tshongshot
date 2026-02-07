@@ -1,0 +1,208 @@
+/* app.css */
+:root{
+  --bg:#0b0c0f;
+  --card:#12141a;
+  --card2:#0f1116;
+  --text:#eaeef7;
+  --muted:#a9b3c6;
+  --line:rgba(255,255,255,.12);
+  --btn:#ffffff;
+  --btnText:#111;
+  --accent:#8dd0ff;
+  --shadow:0 18px 55px rgba(0,0,0,.55);
+  --radius:20px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:radial-gradient(1200px 700px at 40% 25%, rgba(141,208,255,.14), transparent 60%),
+             radial-gradient(1200px 700px at 70% 60%, rgba(255,255,255,.08), transparent 60%),
+             var(--bg);
+  color:var(--text);
+  font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+}
+
+/* === LAYOUT: Blatt von oben nach unten === */
+.wrap{
+  min-height:100%;
+  display:block;              /* vorher flex */
+  padding:28px 16px;
+}
+
+/* optionaler innerer Container (wenn du <div class="sheet"> nutzt) */
+.sheet{
+  width:min(760px, 96vw);
+  margin:0 auto;
+}
+
+/* Falls du KEIN .sheet verwendest: erstes Kind in wrap wird zentriert */
+.wrap > *{
+  width:min(760px, 96vw);
+  margin:0 auto;
+}
+
+/* Card: immer 100% innerhalb container */
+.card{
+  width:100%;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:24px 22px;
+  backdrop-filter: blur(10px);
+}
+
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.small{font-size:13px; color:var(--muted)}
+
+.lang{
+  display:flex;
+  gap:8px;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:6px;
+}
+
+.lang button{
+  border:0;
+  background:transparent;
+  color:var(--text);
+  padding:6px 10px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  opacity:.85;
+}
+
+.lang button.active{
+  background:rgba(255,255,255,.14);
+  opacity:1;
+}
+
+h1{margin:6px 0 10px 0; font-size:28px; line-height:1.15}
+h2{margin:18px 0 10px 0; font-size:18px; color:var(--text)}
+p{margin:10px 0; color:var(--muted); line-height:1.55}
+
+hr{
+  border:0;
+  border-top:1px solid var(--line);
+  margin:16px 0;
+}
+
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  background:var(--btn);
+  color:var(--btnText);
+  padding:12px 16px;
+  border-radius:999px;
+  font-weight:800;
+  letter-spacing:.02em;
+}
+
+.btn:active{transform:translateY(1px)}
+
+.code{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:10px 12px;
+}
+
+.code span{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+  font-size:16px;
+  letter-spacing:.06em;
+  color:var(--text);
+}
+
+.code button{
+  margin-left:auto;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.1);
+  color:var(--text);
+  border-radius:12px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.grid{
+  display:grid;
+  gap:14px;
+}
+
+.q{
+  padding:14px 12px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.03);
+}
+
+/* du nutzt im HTML q-title, in CSS stand qtitle -> beide unterstützen */
+.q .qtitle,
+.q .q-title{
+  font-weight:800;
+  color:var(--text);
+  margin-bottom:8px;
+}
+
+.scale{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:8px;
+}
+
+.scale button{
+  width:40px;
+  height:34px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  font-weight:800;
+  cursor:pointer;
+}
+
+.scale button.active{
+  background:rgba(141,208,255,.22);
+  border-color:rgba(141,208,255,.6);
+}
+
+.input, textarea, select{
+  width:100%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:14px;
+}
+
+textarea{min-height:110px; resize:vertical}
+
+.actions{
+  margin-top:16px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.note{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:8px;
+}

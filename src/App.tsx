@@ -8,7 +8,7 @@ function scrollToId(id: string) {
 }
 
 type Lang = "de" | "vi" | "en";
-type SectionId = "product" | "brew" | "ingredients" | "unboxing" | "faq" | "contact";
+type SectionId = "product" | "brew" | "ingredients" | "unboxing" | "trust" | "faq" | "contact";
 
 export default function App() {
   const { t, i18n } = useTranslation();
@@ -37,6 +37,11 @@ export default function App() {
           id: "unboxing" as const,
           label: lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing",
         },
+        {
+          id: "trust" as const,
+          label: lang === "de" ? "Trust" : lang === "vi" ? "Niềm tin" : "Trust",
+        },
+
         { id: "faq" as const, label: t("faq_title") },
         {
           id: "contact" as const,
@@ -142,13 +147,7 @@ export default function App() {
 
               <div className="navRight">
                 <div className="langSwitch" aria-label="Language switch">
-                  <button
-                    className={`langBtn ${lang === "de" ? "langBtnActive" : ""}`}
-                    onClick={() => setLang("de")}
-                    type="button"
-                  >
-                    DE
-                  </button>
+                  {/* ✅ ORDER CHANGED: VI → EN → DE */}
                   <button
                     className={`langBtn ${lang === "vi" ? "langBtnActive" : ""}`}
                     onClick={() => setLang("vi")}
@@ -162,6 +161,13 @@ export default function App() {
                     type="button"
                   >
                     EN
+                  </button>
+                  <button
+                    className={`langBtn ${lang === "de" ? "langBtnActive" : ""}`}
+                    onClick={() => setLang("de")}
+                    type="button"
+                  >
+                    DE
                   </button>
                 </div>
 
@@ -285,7 +291,11 @@ export default function App() {
                   <div>
                     <div className="barsLabel">{lang === "de" ? "Heiß" : lang === "vi" ? "Nóng" : "Hot"}</div>
                     <div className="muted" style={{ marginTop: 4 }}>
-                      {lang === "de" ? "Dolce Gusto: 4 Balken" : lang === "vi" ? "Dolce Gusto: 4 vạch" : "Dolce Gusto: 4 bars"}
+                      {lang === "de"
+                        ? "Dolce Gusto: 4 Balken"
+                        : lang === "vi"
+                        ? "Dolce Gusto: 4 vạch"
+                        : "Dolce Gusto: 4 bars"}
                     </div>
                   </div>
                   <div style={{ display: "grid", gap: 8, justifyItems: "end" }}>
@@ -294,7 +304,9 @@ export default function App() {
                         <span key={i} className={`barDot ${i < 4 ? "on" : ""}`} />
                       ))}
                     </div>
-                    <div className="barsMl">{lang === "de" ? "ca. 140 ml" : lang === "vi" ? "khoảng 140 ml" : "approx. 140 ml"}</div>
+                    <div className="barsMl">
+                      {lang === "de" ? "ca. 140 ml" : lang === "vi" ? "khoảng 140 ml" : "approx. 140 ml"}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -304,7 +316,11 @@ export default function App() {
                   <div>
                     <div className="barsLabel">{lang === "de" ? "Kalt" : lang === "vi" ? "Lạnh" : "Cold"}</div>
                     <div className="muted" style={{ marginTop: 4 }}>
-                      {lang === "de" ? "Dolce Gusto: 3 Balken + ⅔ Eis" : lang === "vi" ? "Dolce Gusto: 3 vạch + ⅔ đá" : "Dolce Gusto: 3 bars + ⅔ ice"}
+                      {lang === "de"
+                        ? "Dolce Gusto: 3 Balken + ⅔ Eis"
+                        : lang === "vi"
+                        ? "Dolce Gusto: 3 vạch + ⅔ đá"
+                        : "Dolce Gusto: 3 bars + ⅔ ice"}
                     </div>
                   </div>
                   <div style={{ display: "grid", gap: 8, justifyItems: "end" }}>
@@ -313,7 +329,9 @@ export default function App() {
                         <span key={i} className={`barDot ${i < 3 ? "on" : ""}`} />
                       ))}
                     </div>
-                    <div className="barsMl">{lang === "de" ? "ca. 100 ml" : lang === "vi" ? "khoảng 100 ml" : "approx. 100 ml"}</div>
+                    <div className="barsMl">
+                      {lang === "de" ? "ca. 100 ml" : lang === "vi" ? "khoảng 100 ml" : "approx. 100 ml"}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -335,8 +353,14 @@ export default function App() {
                   onClick={startPrepVideo}
                   aria-label="Play preparation video"
                 >
-                  <img src="/media/poster-prep.jpg" alt="Preparation preview" loading="eager" />
-                  <span className="videoPlayIcon" aria-hidden="true">▶</span>
+                  <img
+                    src="/media/poster-prep.jpg"
+                    alt="Preparation preview"
+                    loading="eager"
+                  />
+                  <span className="videoPlayIcon" aria-hidden="true">
+                    ▶
+                  </span>
                 </button>
 
                 <video
@@ -375,9 +399,7 @@ export default function App() {
 
             <div className="ingGrid">
               <div className="card cardPad ingCard">
-                <div className="ingTitle">
-                  {lang === "de" ? "Zutaten" : lang === "vi" ? "Thành phần" : "Ingredients"}
-                </div>
+                <div className="ingTitle">{lang === "de" ? "Zutaten" : lang === "vi" ? "Thành phần" : "Ingredients"}</div>
 
                 <ul className="ingList">
                   <li>
@@ -423,34 +445,127 @@ export default function App() {
         </section>
 
         {/* UNBOXING */}
-        <section className="section" id="unboxing">
-          <div className="container">
-            <h2 className="sectionTitle">{lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}</h2>
+          <section className="section" id="unboxing">
+            <div className="container">
+              <h2 className="sectionTitle">
+                {lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}
+              </h2>
 
-            <div className="card ingCard">
-              <div className="videoFrame">
-                <video
-                  className="video"
-                  src="/media/optimized/unboxing.mp4"
-                  poster="/media/poster-unboxing.jpg"
-                  controls
-                  playsInline
-                  preload="metadata"
-                />
-              </div>
+              <div className="card ingCard">
+                <div className="videoFrame">
+                  <video
+                    className="video"
+                    poster="/media/poster-unboxing.jpg"
+                    controls
+                    playsInline
+                    preload="metadata"
+                  >
+                    <source src="/media/optimized/unboxing.mp4" type="video/mp4" />
+                  </video>
+                </div>
 
-              <div className="muted" style={{ marginTop: 10 }}>
-                {lang === "de"
-                  ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."
-                  : lang === "vi"
-                  ? "Cảm giác mở hộp – bao bì & trải nghiệm sản phẩm."
-                  : "A quick look at the unboxing – packaging & product feel."}
+                <div className="muted" style={{ marginTop: 10 }}>
+                  {lang === "de"
+                    ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."
+                    : lang === "vi"
+                    ? "Cảm giác mở hộp – bao bì & trải nghiệm sản phẩm."
+                    : "A quick look at the unboxing – packaging & product feel."}
+                </div>
               </div>
             </div>
+          </section>
+
+        {/* TRUST */}
+          <section id="trust" className="section trust">
+            <div className="container">
+              <h2 className="sectionTitle">
+                {lang === "de"
+                  ? "Roter Ginseng – weltweit geschätzt"
+                  : lang === "vi"
+                  ? "Hồng sâm – được tin dùng trên toàn cầu"
+                  : "Red Ginseng – trusted worldwide"}
+              </h2>
+
+              <p className="sectionText">
+                {lang === "de"
+                  ? "Panax Ginseng wird seit Langem in hochwertigen Produkten eingesetzt – von Hautpflege bis zu Vital- und Konzentrationspräparaten. Hong Shot bringt diesen bewährten Wirkstoff als praktisches Kapsel-Getränk in den Alltag."
+                  : lang === "vi"
+                  ? "Panax ginseng từ lâu đã được ứng dụng trong nhiều sản phẩm chất lượng cao – từ chăm sóc da đến các sản phẩm hỗ trợ năng lượng & tập trung. Hong Shot đưa hoạt chất quen thuộc này vào dạng đồ uống viên nang – tiện và dễ định lượng."
+                  : "Panax ginseng has long been used in high-quality products—from skincare to vitality and focus supplements. Hong Shot brings this proven ingredient into a practical capsule drink for daily routines."}
+              </p>
+
+              <img
+                src="/media/trust-ginseng.png"
+                alt={
+                  lang === "de"
+                    ? "Ginseng: Anwendungen und Zubereitung als Kapsel-Getränk"
+                    : lang === "vi"
+                    ? "Hồng sâm: ứng dụng và cách pha đồ uống viên nang"
+                    : "Ginseng: applications and capsule drink preparation"
+                }
+                className="trustImage"
+                loading="lazy"
+              />
+
+
+            
+
+          {/* ✅ MORE INFO: 3 mini cards */}
+            <div className="trustGrid">
+              <div className="trustCard">
+                <div className="trustIcon">✨</div>
+                <h3>
+                  {lang === "de" ? "Premium-Hautpflege" : lang === "vi" ? "Chăm sóc da cao cấp" : "Premium skincare"}
+                </h3>
+                <p>
+                  {lang === "de"
+                    ? "Ginseng ist in vielen Formeln als revitalisierender Wirkstoff bekannt."
+                    : lang === "vi"
+                    ? "Hồng sâm thường xuất hiện trong các công thức “tái tạo/sáng khỏe”."
+                    : "Ginseng is widely known as a revitalizing ingredient in many formulas."}
+                </p>
+              </div>
+
+              <div className="trustCard">
+                <div className="trustIcon">🧠</div>
+                <h3>
+                  {lang === "de" ? "Fokus & Energie" : lang === "vi" ? "Tập trung & năng lượng" : "Focus & energy"}
+                </h3>
+                <p>
+                  {lang === "de"
+                    ? "Oft genutzt in Vital-Komplexen – z.B. kombiniert mit B-Vitaminen und Zink."
+                    : lang === "vi"
+                    ? "Thường dùng trong các sản phẩm bổ trợ – hay đi kèm vitamin nhóm B và kẽm."
+                    : "Often used in vitality blends—commonly paired with B vitamins and zinc."}
+                </p>
+              </div>
+
+              <div className="trustCard">
+                <div className="trustIcon">☕</div>
+                <h3>
+                  {lang === "de" ? "Als Kapsel-Drink" : lang === "vi" ? "Dạng đồ uống viên nang" : "As a capsule drink"}
+                </h3>
+                <p>
+                  {lang === "de"
+                    ? "Praktisch im Alltag: klare Portionierung und schnelle Zubereitung."
+                    : lang === "vi"
+                    ? "Tiện hằng ngày: định lượng rõ ràng, pha nhanh."
+                    : "Everyday-friendly: clear portioning and fast preparation."}
+                </p>
+              </div>
+            </div>
+
+            <p className="trustNote">
+              {lang === "de"
+                ? "Symbolische Darstellung zur Einordnung. Keine Verbindung oder Empfehlung durch Drittmarken."
+                : lang === "vi"
+                ? "Hình minh họa mang tính biểu tượng để tham khảo. Không có liên kết hay chứng thực từ bên thứ ba."
+                : "Symbolic illustration for context. No affiliation or endorsement by third parties."}
+            </p>
           </div>
         </section>
 
-        {/* FAQ */}
+      {/* FAQ */}
         <section className="section" id="faq">
           <div className="container">
             <h2 className="sectionTitle">{t("faq_title")}</h2>
@@ -514,47 +629,53 @@ export default function App() {
                 </a>
               );
             })()}
+
+          {/* Optional: Button zum Pilot-Survey */}
+            <div id="survey" style={{ marginTop: 12 }}>
+            <a className="ctaButton" href="/pilot/index.html">
+            {t("pilot_cta")}
+            </a>
+          </div>
+
           </div>
         </section>
-        </main>
+      </main>
 
-        <footer className="footer">
-          <div className="container footerInner">
-            <div className="footerLeft">
-              © {new Date().getFullYear()} TS Hong Shot
-            </div>
+      <footer className="footer">
+        <div className="container footerInner">
+          <div className="footerLeft">© {new Date().getFullYear()} TS Hong Shot</div>
 
-            {(() => {
-              const lang = (i18n.language || "de").slice(0, 2);
+          {(() => {
+            const lang = (i18n.language || "de").slice(0, 2);
 
-              const impressumHref =
-                lang === "en"
-                  ? "/legal/impressum.en.html"
-                  : lang === "vi"
-                  ? "/legal/impressum.vi.html"
-                  : "/legal/impressum.de.html";
+            const impressumHref =
+              lang === "en"
+                ? "/legal/impressum.en.html"
+                : lang === "vi"
+                ? "/legal/impressum.vi.html"
+                : "/legal/impressum.de.html";
 
-              const privacyHref =
-                lang === "en"
-                  ? "/legal/privacy.en.html"
-                  : lang === "vi"
-                  ? "/legal/baomat.vi.html"
-                  : "/legal/datenschutz.de.html";
+            const privacyHref =
+              lang === "en"
+                ? "/legal/privacy.en.html"
+                : lang === "vi"
+                ? "/legal/baomat.vi.html"
+                : "/legal/datenschutz.de.html";
 
-              return (
-                <div className="footerRight">
-                  <a className="footerLink" href={impressumHref}>
-                    {t("footer_impressum")}
-                  </a>
-                  <span className="footerDot">·</span>
-                  <a className="footerLink" href={privacyHref}>
-                    {t("footer_privacy")}
-                  </a>
-                </div>
-              );
-            })()}
-          </div>
-        </footer>
-        </>
-        );
-        }
+            return (
+              <div className="footerRight">
+                <a className="footerLink" href={impressumHref}>
+                  {t("footer_impressum")}
+                </a>
+                <span className="footerDot">·</span>
+                <a className="footerLink" href={privacyHref}>
+                  {t("footer_privacy")}
+                </a>
+              </div>
+            );
+          })()}
+        </div>
+      </footer>
+    </>
+  );
+}
