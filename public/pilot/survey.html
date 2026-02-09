@@ -358,6 +358,55 @@
           </div>
         </div>
 
+
+        <h2 data-vi="PHẦN G – MÁY PHA"
+          data-en="PART G – THE MACHINE"
+          data-de="TEIL G – DIE MASCHINE"></h2>
+
+            <div class="q">
+              <div class="q-title"
+                  data-vi="G1. Nếu có máy pha (giá khoảng 80–100€), bạn có sẵn sàng xem thử / trải nghiệm khi thấy ở cửa hàng không?"
+                  data-en="G1. Would you be willing to try/look at such a machine (approx. €80–100)?"
+                  data-de="G1. Würdest du dir so eine Maschine (ca. 80–100 €) grundsätzlich anschauen/ausprobieren?"></div>
+              <div class="choices">
+                <label class="choice">
+                  <input type="radio" name="g1_machine_interest" value="yes" required>
+                  <span data-vi="Có, sẵn sàng" data-en="Yes, sure" data-de="Ja, gerne"></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="g1_machine_interest" value="maybe">
+                  <span data-vi="Có thể" data-en="Maybe" data-de="Vielleicht"></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="g1_machine_interest" value="no">
+                  <span data-vi="Không / Có lẽ không" data-en="Probably not / No" data-de="Eher nicht / Nein"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="q">
+              <div class="q-title"
+                  data-vi="G2. Nếu bạn thích sản phẩm: Bạn thấy việc mua máy trong 3 tháng tới thực tế đến mức nào?"
+                  data-en="G2. If you like the product: How realistic is a purchase in the next 3 months?"
+                  data-de="G2. Wenn dir das Produkt gefällt: Wie realistisch ist ein Kauf in den nächsten 3 Monaten?"></div>
+              <div class="choices">
+                <label class="choice">
+                  <input type="radio" name="g2_machine_afford" value="very_realistic" required>
+                  <span data-vi="Rất thực tế" data-en="Very realistic" data-de="Sehr realistisch"></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="g2_machine_afford" value="unsure">
+                  <span data-vi="Chưa chắc" data-en="Unsure / Maybe" data-de="Unsicher / Vielleicht"></span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="g2_machine_afford" value="unrealistic">
+                  <span data-vi="Không thực tế" data-en="Not realistic" data-de="Gar nicht realistisch"></span>
+                </label>
+              </div>
+            </div>
+
+
+
         <div class="footer">
           <button class="btn" type="submit" data-de="Senden" data-vi="Gửi" data-en="Submit"></button>
         </div>
@@ -368,6 +417,72 @@
 
   <!-- App -->
   <script src="app.js"></script>
+
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+  import { getDatabase, ref, runTransaction, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+
+  const firebaseConfig = {
+    databaseURL: "https://rote-ginseng-vn-default-rtdb.europe-west1.firebasedatabase.app/"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const pad4 = (n) => String(n).padStart(4, "0");
+
+  function cityToCode(metaCity) {
+    const v = String(metaCity || "").toLowerCase();
+    if (v === "saigon") return "SG";
+    if (v === "dalat" || v === "da lat") return "DL";
+    // Default für Start Saigon Feldstudie:
+    return "SG";
+  }
+
+  async function generateTesterId(cityCode) {
+    const counterRef = ref(db, `counters/${cityCode}`);
+    const res = await runTransaction(counterRef, (cur) => (cur ?? 0) + 1);
+    const next = res.snapshot.val();
+    return `${cityCode}-${pad4(next)}`;
+  }
+
+  async function publishLiveId(cityCode, testerId) {
+    await set(ref(db, `live/${cityCode}/currentTesterId`), {
+      tester_id: testerId,
+      ts_utc: serverTimestamp()
+    });
+  }
+
+  // Nur setzen, wenn dein app.js es nicht schon bereitstellt
+  window.Ginseng = window.Ginseng || {};
+  if (typeof window.Ginseng.submitSurvey !== "function") {
+    window.Ginseng.submitSurvey = async function(payload) {
+      const cityCode = cityToCode(payload.meta_city);
+
+      // Tester-ID generieren
+      const testerId = await generateTesterId(cityCode);
+
+      // Payload erweitern
+      payload.tester_id = testerId;
+      payload.meta_city_code = cityCode;
+
+      // Survey speichern
+      await set(ref(db, `surveys/${testerId}`), {
+        ...payload,
+        ts_utc: serverTimestamp()
+      });
+
+      // Live an Observer senden
+      await publishLiveId(cityCode, testerId);
+
+      // Optional: lokal merken (für deine Nachvollziehbarkeit)
+      localStorage.setItem("ginseng_last_tester_id", testerId);
+
+      return testerId;
+    };
+  }
+</script>
+
 
   <!-- Survey Logic (safe + fallback) -->
   <script>
@@ -459,6 +574,12 @@
       const form = document.getElementById("surveyForm");
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
+        if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
 
         // Skalen-Validierung (hidden inputs)
         const requiredScales = ["q2b_mouthfeel","q6_tooCheap","q7_goodValue","q8_expOk","q9_tooExp","q15_repurchase","q14_spend"];
