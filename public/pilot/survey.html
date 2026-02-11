@@ -365,9 +365,9 @@
 
             <div class="q">
               <div class="q-title"
-                  data-vi="G1. Nếu có máy pha (giá khoảng 80–100€), bạn có sẵn sàng xem thử / trải nghiệm khi thấy ở cửa hàng không?"
-                  data-en="G1. Would you be willing to try/look at such a machine (approx. €80–100)?"
-                  data-de="G1. Würdest du dir so eine Maschine (ca. 80–100 €) grundsätzlich anschauen/ausprobieren?"></div>
+                  data-vi="G1. Nếu có máy pha (giá khoảng 2,2–2,8 triệu VND / $90–110), bạn có sẵn sàng xem thử / trải nghiệm khi thấy ở cửa hàng không?"
+                  data-en="G1. Would you be willing to try/look at such a machine (approx. 2.2–2.8M VND / $90–110)?"
+                  data-de="G1. Würdest du dir so eine Maschine (ca. 2,2–2,8 Mio. VND / $90–110) grundsätzlich anschauen/ausprobieren?"></div>
               <div class="choices">
                 <label class="choice">
                   <input type="radio" name="g1_machine_interest" value="yes" required>
@@ -457,29 +457,51 @@
   window.Ginseng = window.Ginseng || {};
   if (typeof window.Ginseng.submitSurvey !== "function") {
     window.Ginseng.submitSurvey = async function(payload) {
-      const cityCode = cityToCode(payload.meta_city);
+  const cityCode = cityToCode(payload.meta_city);
 
-      // Tester-ID generieren
-      const testerId = await generateTesterId(cityCode);
+  // Tester-ID generieren
+  const testerId = await generateTesterId(cityCode);
 
-      // Payload erweitern
-      payload.tester_id = testerId;
-      payload.meta_city_code = cityCode;
+  // Lokale Zeit / Zeitzone (vom Gerät, z.B. Asia/Bangkok)
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  const now = new Date();
 
-      // Survey speichern
-      await set(ref(db, `surveys/${testerId}`), {
-        ...payload,
-        ts_utc: serverTimestamp()
-      });
+  // lesbarer lokaler Timestamp (stabil, 24h)
+  const tsLocal = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: tz,
+    year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
+    hour12: false
+  }).format(now).replace(" ", " ");
 
-      // Live an Observer senden
-      await publishLiveId(cityCode, testerId);
+  // Payload erweitern
+  payload.tester_id = testerId;
+  payload.meta_city_code = cityCode;
 
-      // Optional: lokal merken (für deine Nachvollziehbarkeit)
-      localStorage.setItem("ginseng_last_tester_id", testerId);
+  // NEU: Zeitfelder wie früher
+  payload.timezone = tz;                       // z.B. "Asia/Bangkok"
+  payload.ts_local = tsLocal;                  // z.B. "2026-02-11 10:57:29"
+  payload.ts_client_utc = now.toISOString();   // z.B. "2026-02-11T03:57:29.827Z"
+  payload.tz_offset_min = -now.getTimezoneOffset(); // Bangkok: 420
 
-      return testerId;
-    };
+  // Survey speichern
+  await set(ref(db, `surveys/${testerId}`), {
+    ...payload,
+    ts_server_utc: serverTimestamp() // eindeutiger Name, damit klar ist was was ist
+  });
+
+  // Live an Observer senden
+  await set(ref(db, `live/${cityCode}/currentTesterId`), {
+    tester_id: testerId,
+    timezone: tz,
+    ts_local: tsLocal,
+    ts_server_utc: serverTimestamp()
+  });
+
+  localStorage.setItem("ginseng_last_tester_id", testerId);
+  return testerId;
+};
+
   }
 </script>
 
