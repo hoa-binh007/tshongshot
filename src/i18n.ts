@@ -148,7 +148,7 @@ i18n.use(initReactI18next).init({
     }
   },
 
-  lng: "de",
+  lng: "vi",
   fallbackLng: "en",
   interpolation: { escapeValue: false }
 });

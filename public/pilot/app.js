@@ -3,12 +3,9 @@
   const DEFAULT_LANG = "vi";
 
 function getLang() {
-  const saved = localStorage.getItem(KEY);
-  if (!saved) return DEFAULT_LANG;
-
-  // Wenn du Vietnam als Primärmarkt willst:
-  return saved === "de" ? "vi" : saved;
+  return "vi";
 }
+
 
 
   function setLang(lang) {
