@@ -3,516 +3,290 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Survey</title>
+  <title>Khảo sát Hong Shot (Đà Lạt)</title>
   <link rel="stylesheet" href="app.css"/>
 
   <style>
-    /* Minimal, damit die Skalen sichtbar + aktiv sind (falls app.css es nicht hat) */
-    .q-title { font-weight: 700; margin-bottom: 8px; }
-    .choices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-    .choice { display: flex; gap: 10px; align-items: center; }
-    .scale { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
-    .dot { min-width: 38px; height: 38px; border-radius: 999px; border: 1px solid #666; background: transparent; color: inherit; cursor: pointer; }
-    .dot.active { background: #e31e24 !important; color: #fff !important; border-color: #e31e24 !important; }
-    .pilot-meta select { background: transparent; color: inherit; border: 1px solid #555; border-radius: 10px; }
-    .pilot-meta option { color: #000; }
+    .card { margin-bottom: 14px; }
+    .row { display:flex; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+    .btn.primary { cursor:pointer; }
+    .hero { width:100%; height:auto; border-radius:14px; display:block; margin:0 0 12px 0; }
+    .small { opacity:.85; font-size:.95rem; }
   </style>
 </head>
 
 <body>
-
-   <div class="wrap">
-
+  <div class="wrap">
     <div class="card">
 
-      <!-- HEADER ganz oben im Blatt -->
+      <!-- HEADER / CLIFFHANGER (Bild oben) -->
+      <!-- WICHTIG: Lege das Bild nach public/media/hongshot_header.jpg -->
+      <img class="hero" src="../media/hongshot_header.jpg" alt="HONG SHOT">
+
       <div class="row">
-        <div class="small" data-de="Umfrage" data-vi="Khảo sát" data-en="Survey"></div>
-        <div class="lang">
-          <button id="btnVi" type="button">🇻🇳</button>
-          <button id="btnEn" type="button">🇬🇧</button>
-          <button id="btnDe" type="button">🇩🇪</button>
+        <div class="small">Khảo sát nhanh – Đà Lạt</div>
+      </div>
+
+      <h1>Khảo sát nhanh (Bản cuối – Đà Lạt)</h1>
+      <p>Chọn nhanh. Ẩn danh. Mất khoảng 30–60 giây.</p>
+
+      <form id="surveyForm" novalidate>
+
+        <!-- Q0 -->
+        <div class="card">
+          <h3>0. Bạn đã từng uống Hồng Sâm (Nhân sâm đỏ Hàn Quốc) chưa?</h3>
+          <label><input type="radio" name="ginsengExperience" value="never" required> Chưa bao giờ</label><br>
+          <label><input type="radio" name="ginsengExperience" value="1-2"> Đã uống 1–2 lần</label><br>
+          <label><input type="radio" name="ginsengExperience" value="often"> Uống thường xuyên</label>
         </div>
-      </div>
 
+        <!-- 1 -->
+        <div class="card">
+          <h3>1. Hương vị</h3>
+          <label><input type="radio" name="taste" value="5" required> Rất ngon</label><br>
+          <label><input type="radio" name="taste" value="4"> Ngon</label><br>
+          <label><input type="radio" name="taste" value="3"> Bình thường</label><br>
+          <label><input type="radio" name="taste" value="2"> Không ngon</label><br>
+          <label><input type="radio" name="taste" value="1"> Rất khó uống</label>
+        </div>
 
-    <!-- META (optional) -->
-    <div class="pilot-meta" style="margin:12px 0; padding:12px; border:1px solid #333; border-radius:10px;">
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <label style="flex:1; min-width:160px;">
-          <div style="font-weight:600; margin-bottom:6px;"
-               data-de="Rolle (optional)"
-               data-vi="Vai trò (tùy chọn)"
-               data-en="Role (optional)"></div>
+        <!-- 2 -->
+        <div class="card">
+          <h3>2. Sau khi uống bạn có thấy tỉnh táo hơn?</h3>
+          <label><input type="radio" name="energy" value="yes" required> Có</label><br>
+          <label><input type="radio" name="energy" value="little"> Một chút</label><br>
+          <label><input type="radio" name="energy" value="no"> Không</label><br>
+          <label><input type="radio" name="energy" value="unsure"> Không chắc</label>
+        </div>
 
-          <select id="role" style="width:100%; padding:8px;">
-            <option value="" data-de="(überspringen)" data-vi="(bỏ qua)" data-en="(skip)"></option>
-            <option value="consumer" data-de="Konsument" data-vi="Người dùng" data-en="Consumer"></option>
-            <option value="expert" data-de="Experte" data-vi="Chuyên gia" data-en="Expert"></option>
-            <option value="internal" data-de="Intern (Firma)" data-vi="Nội bộ (công ty)" data-en="Internal (company)"></option>
-          </select>
-        </label>
+        <!-- 3 -->
+        <div class="card">
+          <h3>3. Bạn có uống thay cà phê không?</h3>
+          <label><input type="radio" name="replaceCoffee" value="yes" required> Có</label><br>
+          <label><input type="radio" name="replaceCoffee" value="sometimes"> Thỉnh thoảng</label><br>
+          <label><input type="radio" name="replaceCoffee" value="no"> Không</label>
+        </div>
 
-        <label style="flex:3; min-width:160px;">
-          <div style="font-weight:600; margin-bottom:6px;"
-               data-de="Stadt (optional)"
-               data-vi="Thành phố (tùy chọn)"
-               data-en="City (optional)"></div>
+        <!-- 4 -->
+        <div class="card">
+          <h3>4. Nếu sản phẩm này có sẵn tại cửa hàng/siêu thị, bạn có mua không?</h3>
+          <label><input type="radio" name="buyIntent" value="yes" required> Chắc chắn mua</label><br>
+          <label><input type="radio" name="buyIntent" value="maybe"> Có thể mua</label><br>
+          <label><input type="radio" name="buyIntent" value="no"> Không mua</label>
+        </div>
 
-         <select id="city" style="width:100%; padding:8px;" required>
-  <option value="DaLat" selected>Da Lat</option>
-  <option value="Saigon">Ho Chi Minh City</option>
-</select>
+        <!-- 5 (Preis für 1 ly) -->
+        <div class="card">
+          <h3>5. Với chất lượng Hồng Sâm Hàn Quốc chính hãng, mức giá nào sau đây cho 1 ly là hợp lý?</h3>
+          <label><input type="radio" name="price" value="<35000" required> Dưới 35.000 VNĐ</label><br>
+          <label><input type="radio" name="price" value="35000-45000"> 35.000 – 45.000 VNĐ</label><br>
+          <label><input type="radio" name="price" value="45000-55000"> 45.000 – 55.000 VNĐ</label><br>
+          <label><input type="radio" name="price" value=">55000"> Trên 55.000 VNĐ</label>
+        </div>
 
-        </label>
-      </div>
+        <!-- 6 -->
+        <div class="card">
+          <h3>6. Bạn có máy pha viên nén (ví dụ: Dolce Gusto)?</h3>
+          <label><input type="radio" name="machine" value="yes" required> Có</label><br>
+          <label><input type="radio" name="machine" value="no"> Không</label>
 
-      <div style="margin-top:8px; font-size:0.9em; opacity:0.8;"
-           data-de="Hilft uns beim Vergleich der Standorte."
-           data-vi="Giúp chúng tôi so sánh giữa các thành phố."
-           data-en="Helps us compare cities/experts."></div>
-    </div>
+          <div id="machineFollowUp" style="display:none; margin-top:10px;">
+            <p>Nếu không, bạn có sẵn sàng mua máy?</p>
+            <label><input type="radio" name="buyMachine" value="yes"> Có</label><br>
+            <label><input type="radio" name="buyMachine" value="maybe"> Có thể</label><br>
+            <label><input type="radio" name="buyMachine" value="no"> Không</label>
+          </div>
+        </div>
 
-    <div class="card">
-      <h1 data-de="Schnellumfrage (Final v2.1)"
-          data-vi="Khảo sát nhanh (Bản cuối v2.1)"
-          data-en="Quick survey (Final v2.1)"></h1>
+        <!-- 7 -->
+        <div class="card">
+          <h3>7. Khi nào bạn sẽ uống? (Có thể chọn nhiều đáp án)</h3>
+          <label><input type="checkbox" name="when" value="morning"> Buổi sáng</label><br>
+          <label><input type="checkbox" name="when" value="work"> Làm việc / Học tập</label><br>
+          <label><input type="checkbox" name="when" value="sport"> Trước hoặc sau tập thể thao</label><br>
+          <label><input type="checkbox" name="when" value="evening"> Buổi tối</label><br>
+          <label><input type="checkbox" name="when" value="unsure"> Chưa rõ</label>
+        </div>
 
-      <p data-de="Anonym. Schnell tippen."
-         data-vi="Chọn nhanh. Ẩn danh."
-         data-en="Tap quickly. Anonymous."></p>
+        <!-- 8 -->
+        <div class="card">
+          <h3>8. Độ tuổi</h3>
+          <label><input type="radio" name="age" value="18-25" required> 18–25</label><br>
+          <label><input type="radio" name="age" value="26-35"> 26–35</label><br>
+          <label><input type="radio" name="age" value="36-50"> 36–50</label><br>
+          <label><input type="radio" name="age" value="50+"> Trên 50</label>
+        </div>
 
-      
-         <form id="surveyForm">
+        <!-- 9 -->
+        <div class="card">
+          <h3>9. Bạn có giới thiệu cho bạn bè?</h3>
+          <label><input type="radio" name="recommend" value="yes" required> Có</label><br>
+          <label><input type="radio" name="recommend" value="maybe"> Có thể</label><br>
+          <label><input type="radio" name="recommend" value="no"> Không</label>
+        </div>
 
-  <!-- META -->
-  <div class="card">
-    <div class="row">
-      <div class="field">
-        <label>Mã số</label>
-        <input type="text" name="id" placeholder="VD: DL001">
-      </div>
+        <!-- Feedback -->
+        <div class="card">
+          <h3>Góp ý (tùy chọn)</h3>
+          <textarea name="feedback" rows="3" placeholder="Ý kiến của bạn..."></textarea>
+        </div>
 
-      <div class="field">
-        <label>Ngày</label>
-        <input type="datetime-local" name="started_at_local" id="startedAtLocal">
-      </div>
-    </div>
-
-    <div class="field">
-      <label>Địa điểm</label>
-      <label><input type="radio" name="location" value="dalat"> Đà Lạt</label>
-      <label><input type="radio" name="location" value="saigon"> Sài Gòn</label>
-    </div>
-  </div>
-
-  <!-- 1 -->
-  <div class="card">
-    <h3>1. Hương vị</h3>
-    <label><input type="radio" name="taste" value="5"> Rất ngon</label>
-    <label><input type="radio" name="taste" value="4"> Ngon</label>
-    <label><input type="radio" name="taste" value="3"> Bình thường</label>
-    <label><input type="radio" name="taste" value="2"> Không ngon</label>
-    <label><input type="radio" name="taste" value="1"> Rất khó uống</label>
-  </div>
-
-  <!-- 2 -->
-  <div class="card">
-    <h3>2. Sau khi uống bạn có thấy tỉnh táo hơn?</h3>
-    <label><input type="radio" name="energy" value="yes"> Có</label>
-    <label><input type="radio" name="energy" value="little"> Một chút</label>
-    <label><input type="radio" name="energy" value="no"> Không</label>
-    <label><input type="radio" name="energy" value="unsure"> Không chắc</label>
-  </div>
-
-  <!-- 3 -->
-  <div class="card">
-    <h3>3. Bạn có uống thay cà phê không?</h3>
-    <label><input type="radio" name="replaceCoffee" value="yes"> Có</label>
-    <label><input type="radio" name="replaceCoffee" value="sometimes"> Thỉnh thoảng</label>
-    <label><input type="radio" name="replaceCoffee" value="no"> Không</label>
-  </div>
-
-  <!-- 4 -->
-  <div class="card">
-    <h3>4. Bạn có muốn mua sản phẩm này?</h3>
-    <label><input type="radio" name="buyIntent" value="yes"> Có</label>
-    <label><input type="radio" name="buyIntent" value="maybe"> Có thể</label>
-    <label><input type="radio" name="buyIntent" value="no"> Không</label>
-  </div>
-
-  <!-- 5 -->
-  <div class="card">
-    <h3>5. Giá phù hợp cho 1 viên</h3>
-    <label><input type="radio" name="price" value="<15000"> Dưới 15.000 VNĐ</label>
-    <label><input type="radio" name="price" value="15000-20000"> 15.000 – 20.000 VNĐ</label>
-    <label><input type="radio" name="price" value="20000-25000"> 20.000 – 25.000 VNĐ</label>
-    <label><input type="radio" name="price" value=">25000"> Trên 25.000 VNĐ</label>
-  </div>
-
-  <!-- 6 -->
-  <div class="card">
-    <h3>6. Bạn có máy pha viên nén (ví dụ: Dolce Gusto)?</h3>
-    <label><input type="radio" name="machine" value="yes" onclick="toggleMachine(false)"> Có</label>
-    <label><input type="radio" name="machine" value="no" onclick="toggleMachine(true)"> Không</label>
-
-    <div id="machineFollowUp" style="display:none; margin-top:10px;">
-      <p>Nếu không, bạn có sẵn sàng mua máy?</p>
-      <label><input type="radio" name="buyMachine" value="yes"> Có</label>
-      <label><input type="radio" name="buyMachine" value="maybe"> Có thể</label>
-      <label><input type="radio" name="buyMachine" value="no"> Không</label>
-    </div>
-  </div>
-
-  <!-- 7 -->
-  <div class="card">
-    <h3>7. Khi nào bạn sẽ uống? (Có thể chọn nhiều đáp án)</h3>
-    <label><input type="checkbox" name="when" value="morning"> Buổi sáng</label>
-    <label><input type="checkbox" name="when" value="work"> Làm việc / Học tập</label>
-    <label><input type="checkbox" name="when" value="sport"> Trước hoặc sau tập thể thao</label>
-    <label><input type="checkbox" name="when" value="evening"> Buổi tối</label>
-    <label><input type="checkbox" name="when" value="unsure"> Chưa rõ</label>
-  </div>
-
-  <!-- 8 -->
-  <div class="card">
-    <h3>8. Độ tuổi</h3>
-    <label><input type="radio" name="age" value="18-25"> 18–25</label>
-    <label><input type="radio" name="age" value="26-35"> 26–35</label>
-    <label><input type="radio" name="age" value="36-50"> 36–50</label>
-    <label><input type="radio" name="age" value="50+"> Trên 50</label>
-  </div>
-
-  <!-- 9 -->
-  <div class="card">
-    <h3>9. Bạn có giới thiệu cho bạn bè?</h3>
-    <label><input type="radio" name="recommend" value="yes"> Có</label>
-    <label><input type="radio" name="recommend" value="maybe"> Có thể</label>
-    <label><input type="radio" name="recommend" value="no"> Không</label>
-  </div>
-
-  <!-- Feedback -->
-  <div class="card">
-    <h3>Góp ý</h3>
-    <textarea name="feedback" rows="4" placeholder="Ý kiến của bạn..."></textarea>
-  </div>
-
-  <button type="submit" class="btn primary">Gửi khảo sát</button>
-
-</form>
-
-<script>
-function toggleMachine(show) {
-  document.getElementById("machineFollowUp").style.display = show ? "block" : "none";
-}
-</script>
-
+        <button type="submit" class="btn primary">Gửi khảo sát</button>
+      </form>
 
     </div>
   </div>
 
-  <!-- App -->
+  <!-- App (optional) -->
   <script src="app.js"></script>
 
+  <!-- Firebase + Logic (DaLat only, no events paths) -->
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
-  import { getDatabase, ref, runTransaction, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getDatabase, ref, runTransaction, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
 
-// ✅ Ginseng global sicher initialisieren (muss VOR ensureLive verwendet werden)
-window.Ginseng = window.Ginseng || {};
-window.Ginseng._live = window.Ginseng._live || { testerId: null, cityCode: null };
+    const firebaseConfig = {
+      databaseURL: "https://rote-ginseng-vn-default-rtdb.europe-west1.firebasedatabase.app/"
+    };
 
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
 
+    const CITY_CODE = "DL";   // Da Lat only
+    const CITY_NAME = "DaLat";
 
-  const firebaseConfig = {
-    databaseURL: "https://rote-ginseng-vn-default-rtdb.europe-west1.firebasedatabase.app/"
-  };
+    const pad4 = (n) => String(n).padStart(4, "0");
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+    async function generateTesterId() {
+      const counterRef = ref(db, `counters/${CITY_CODE}`);
+      const res = await runTransaction(counterRef, (cur) => (cur ?? 0) + 1);
+      const next = res.snapshot.val();
+      return `${CITY_CODE}-${pad4(next)}`;
+    }
 
-  const pad4 = (n) => String(n).padStart(4, "0");
+    async function publishLiveId(testerId) {
+      await set(ref(db, `live/${CITY_CODE}/currentTesterId`), {
+        tester_id: testerId,
+        ts_utc: serverTimestamp()
+      });
+    }
 
+    async function ensureLiveTesterId() {
+      const key = "ginseng_last_tester_id";
+      const cached = localStorage.getItem(key);
 
-function cityToCode(metaCity) {
-  const v = String(metaCity || "").toLowerCase().trim();
-  if (v === "dalat" || v === "da lat") return "DL";
-  if (v === "saigon" || v === "ho chi minh" || v === "hcm" || v === "hochiminh") return "SG";
-  // Default: DaLat (weil du gerade nur DaLat testest)
-  return "DL";
-}
+      // Wenn schon eine ID im Session-Kontext existiert, reuse (verhindert doppelte IDs bei refresh)
+      if (cached && cached.startsWith(`${CITY_CODE}-`)) {
+        return cached;
+      }
 
+      const testerId = await generateTesterId();
+      localStorage.setItem(key, testerId);
 
-  async function generateTesterId(cityCode) {
-    const counterRef = ref(db, `counters/${cityCode}`);
-    const res = await runTransaction(counterRef, (cur) => (cur ?? 0) + 1);
-    const next = res.snapshot.val();
-    return `${cityCode}-${pad4(next)}`;
-  }
+      // Live publish für Operator/Observer
+      await publishLiveId(testerId);
 
-  async function publishLiveId(cityCode, testerId) {
-    await set(ref(db, `live/${cityCode}/currentTesterId`), {
-      tester_id: testerId,
-      ts_utc: serverTimestamp()
-    });
-  }
+      return testerId;
+    }
 
-// ✅ NEU: Sofort-ID generieren + live publishen (einmalig)
-async function ensureLiveTesterId(metaCity) {
-  const cityCode = cityToCode(metaCity);
-
-  // Wenn schon erzeugt: wiederverwenden
-  if (window.Ginseng._live.testerId && window.Ginseng._live.cityCode === cityCode) {
-    return window.Ginseng._live.testerId;
-  }
-
-  const testerId = await generateTesterId(cityCode);
-
-  // merken (damit Submit später NICHT neu generiert)
-  window.Ginseng._live.testerId = testerId;
-  window.Ginseng._live.cityCode = cityCode;
-
-  // sofort an Observer senden
-  await publishLiveId(cityCode, testerId);
-
-  // optional: local fallback (Observer kann das auch lesen)
-  localStorage.setItem(`liveTesterId_${cityCode}`, testerId);
-  localStorage.setItem("ginseng_last_tester_id", testerId);
-
-  return testerId;
-}
-
-// ✅ nach außen geben, damit der normale <script> das triggern kann
-window.Ginseng._ensureLive = ensureLiveTesterId;
-
-
-
-  // Nur setzen, wenn dein app.js es nicht schon bereitstellt
-//window.Ginseng = window.Ginseng || {};
-//window.Ginseng._live = window.Ginseng._live || { testerId: null, cityCode: null };
-  if (typeof window.Ginseng.submitSurvey !== "function") {
+    window.Ginseng = window.Ginseng || {};
     window.Ginseng.submitSurvey = async function(payload) {
-  const cityCode = cityToCode(payload.meta_city);
+      const testerId = await ensureLiveTesterId();
 
-  // Tester-ID generieren
-const testerId = await ensureLiveTesterId(payload.meta_city);
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+      const now = new Date();
 
+      const tsLocal = new Intl.DateTimeFormat("sv-SE", {
+        timeZone: tz,
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", second: "2-digit",
+        hour12: false
+      }).format(now).replace(" ", " ");
 
-  // Lokale Zeit / Zeitzone (vom Gerät, z.B. Asia/Bangkok)
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-  const now = new Date();
+      payload.tester_id = testerId;
+      payload.meta_city = CITY_NAME;
+      payload.meta_city_code = CITY_CODE;
 
-  // lesbarer lokaler Timestamp (stabil, 24h)
-  const tsLocal = new Intl.DateTimeFormat("sv-SE", {
-    timeZone: tz,
-    year: "numeric", month: "2-digit", day: "2-digit",
-    hour: "2-digit", minute: "2-digit", second: "2-digit",
-    hour12: false
-  }).format(now).replace(" ", " ");
+      payload.timezone = tz;
+      payload.ts_local = tsLocal;
+      payload.ts_client_utc = now.toISOString();
+      payload.tz_offset_min = -now.getTimezoneOffset();
 
-  // Payload erweitern
-  payload.tester_id = testerId;
-  payload.meta_city_code = cityCode;
+      // Write only to allowed paths: surveys + live + counters (rules compatible)
+      await set(ref(db, `surveys/${testerId}`), {
+        ...payload,
+        ts_server_utc: serverTimestamp()
+      });
 
-  // NEU: Zeitfelder wie früher
-  payload.timezone = tz;                       // z.B. "Asia/Bangkok"
-  payload.ts_local = tsLocal;                  // z.B. "2026-02-11 10:57:29"
-  payload.ts_client_utc = now.toISOString();   // z.B. "2026-02-11T03:57:29.827Z"
-  payload.tz_offset_min = -now.getTimezoneOffset(); // Bangkok: 420
+      await set(ref(db, `live/${CITY_CODE}/currentTesterId`), {
+        tester_id: testerId,
+        timezone: tz,
+        ts_local: tsLocal,
+        ts_server_utc: serverTimestamp()
+      });
 
-  // Survey speichern
-  await set(ref(db, `surveys/${testerId}`), {
-    ...payload,
-    ts_server_utc: serverTimestamp() // eindeutiger Name, damit klar ist was was ist
-  });
+      // Optional: nach Submit neue ID erzwingen für nächsten Tester
+      localStorage.removeItem("ginseng_last_tester_id");
 
-  // Live an Observer senden
-  await set(ref(db, `live/${cityCode}/currentTesterId`), {
-    tester_id: testerId,
-    timezone: tz,
-    ts_local: tsLocal,
-    ts_server_utc: serverTimestamp()
-  });
+      return testerId;
+    };
 
-  localStorage.setItem("ginseng_last_tester_id", testerId);
-  return testerId;
-};
+    // Beim Öffnen direkt ID an Operator/Observer schicken (optional, aber praktisch)
+    (async () => {
+      try { await ensureLiveTesterId(); } catch (e) { console.warn(e); }
+    })();
+  </script>
 
-  }
-</script>
-
-
-
-  <!-- Survey Logic (safe + fallback) -->
+  <!-- UI + Submit wiring (VI only) -->
   <script>
-    // Fallback, falls app.js nicht lädt oder unvollständig ist
-    if (!window.Ginseng) {
-      window.Ginseng = {
-        initLangButtons: function () {
-          const setLang = (lang) => {
-            localStorage.setItem("GINSENG_LANG", lang);
-            this.renderI18n();
-          };
+    function toggleMachineFollowUp() {
+      const machine = document.querySelector('input[name="machine"]:checked')?.value || "";
+      const follow = document.getElementById("machineFollowUp");
+      if (!follow) return;
 
-
-          const btnDe = document.getElementById("btnDe");
-          const btnVi = document.getElementById("btnVi");
-          const btnEn = document.getElementById("btnEn");
-          if (btnDe) btnDe.onclick = () => setLang("de");
-          if (btnVi) btnVi.onclick = () => setLang("vi");
-          if (btnEn) btnEn.onclick = () => setLang("en");
-        },
-
-
-        renderI18n: function () {
-          const lang = localStorage.getItem("GINSENG_LANG") || "vi";
-          document.documentElement.lang = lang;
-          document.querySelectorAll("[data-de]").forEach((el) => {
-            const txt = el.getAttribute("data-" + lang);
-            if (txt == null) return;
-            if (el.tagName === "OPTION") el.text = txt;
-            else el.innerHTML = txt;
-          });
-        },
-        setScale: function(name, value) {
-          const input = document.querySelector('input[name="' + name + '"]');
-          if (input) input.value = value;
-          document.querySelectorAll('button[data-scale="' + name + '"]').forEach((b) => {
-            b.classList.toggle("active", b.getAttribute("data-value") === String(value));
-          });
-        },
-        t: function(map) {
-          const lang = localStorage.getItem("GINSENG_LANG") || "vi";
-          return (map && (map[lang] || map.vi || map.en || map.de)) || "";
-        }
-      };
-    } else {
-      // Falls app.js existiert, aber t() nicht: ergänzen
-      if (typeof window.Ginseng.t !== "function") {
-        window.Ginseng.t = function(map) {
-          const lang = localStorage.getItem("GINSENG_LANG") || document.documentElement.lang || "vi";
-          return (map && (map[lang] || map.vi || map.en || map.de)) || "";
-        };
+      follow.style.display = (machine === "no") ? "block" : "none";
+      if (machine !== "no") {
+        document.querySelectorAll('input[name="buyMachine"]').forEach(i => i.checked = false);
       }
     }
 
-    function updateQ16() {
-      const repurchaseHidden = document.querySelector('input[name="q15_repurchase"]');
-      const q16Block = document.getElementById("q16_block");
-      if (!repurchaseHidden || !q16Block) return;
-      const v = Number(repurchaseHidden.value || "0");
-      q16Block.style.display = (v > 0 && v <= 2) ? "block" : "none";
+    function validateForm(form) {
+      if (form.checkValidity()) return true;
+      form.reportValidity();
+      return false;
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Wichtig: immer rendern (zusätzlich zu app.js)
-      if (window.Ginseng.initLangButtons) window.Ginseng.initLangButtons();
-      if (window.Ginseng.renderI18n) window.Ginseng.renderI18n();
-
-        // ✅ NEU: Sofort beim Öffnen der Befragung eine Live-ID erzeugen/pushen
-  (async () => {
-    try {
-      const cityEl = document.getElementById("city");
-      const metaCity = cityEl ? (cityEl.value || "saigon") : "saigon";
-
-      if (window.Ginseng && typeof window.Ginseng._ensureLive === "function") {
-        await window.Ginseng._ensureLive(metaCity);
-      }
-    } catch (e) {
-      console.warn("Live-ID Start fehlgeschlagen:", e);
-    }
-  })();
-
-        // ✅ NEU: Wenn City geändert wird -> neue Live-ID für neuen City-Code generieren
-      const cityElLive = document.getElementById("city");
-      if (cityElLive) {
-        cityElLive.addEventListener("change", async () => {
-          try {
-            const metaCity = cityElLive.value || "saigon";
-            if (window.Ginseng && typeof window.Ginseng._ensureLive === "function") {
-              await window.Ginseng._ensureLive(metaCity);
-            }
-          } catch (e) {
-            console.warn("Live-ID City change failed:", e);
-          }
-        });
-      }
-
-
-
-      // Skalen klickbar
-      document.querySelectorAll('button.dot[data-scale][data-value]').forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const scaleName = btn.getAttribute("data-scale");
-          const value = btn.getAttribute("data-value");
-          window.Ginseng.setScale(scaleName, value);
-          if (scaleName === "q15_repurchase") updateQ16();
-        });
+      document.querySelectorAll('input[name="machine"]').forEach(i => {
+        i.addEventListener("change", toggleMachineFollowUp);
       });
+      toggleMachineFollowUp();
 
-      // Other Textfeld
-      const otherChk = document.getElementById("q16_otherChk");
-      const otherTxt = document.getElementById("q16_otherText");
-      if (otherChk && otherTxt) {
-        const syncOther = () => {
-          otherTxt.style.display = otherChk.checked ? "block" : "none";
-          if (!otherChk.checked) otherTxt.value = "";
-        };
-        otherChk.addEventListener("change", syncOther);
-        syncOther();
-      }
-
-      updateQ16();
-
-      // Submit
       const form = document.getElementById("surveyForm");
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-
-        // Skalen-Validierung (hidden inputs)
-        const requiredScales = ["q2b_mouthfeel","q6_tooCheap","q7_goodValue","q8_expOk","q9_tooExp","q15_repurchase","q14_spend"];
-        for (const k of requiredScales) {
-          const v = (document.querySelector('input[name="' + k + '"]') || {}).value || "";
-          if (v === "") {
-            alert(window.Ginseng.t({
-              de: "Bitte alle Skalen ausfüllen.",
-              vi: "Vui lòng trả lời đầy đủ các thang điểm.",
-              en: "Please complete all scale questions."
-            }));
-            return;
-          }
-        }
+        if (!validateForm(form)) return;
 
         const fd = new FormData(form);
 
-        // Meta
-        const roleEl = document.getElementById("role");
-        const cityEl = document.getElementById("city");
-        if (roleEl) fd.set("meta_role", roleEl.value || "");
-        if (cityEl) fd.set("meta_city", cityEl.value || "");
+        // Multi-select "when" als JSON-Array
+        const whenArr = Array.from(document.querySelectorAll('input[name="when"]:checked')).map(x => x.value);
+        fd.delete("when");
+        fd.set("when", JSON.stringify(whenArr));
 
-        // Multi-select
-        const q16Reasons = Array.from(document.querySelectorAll('input[name="q16_reason"]:checked')).map(x => x.value);
-        if (q16Reasons.length) fd.set("q16_reason", JSON.stringify(q16Reasons));
+        // Wenn machine != no -> buyMachine löschen
+        const machine = document.querySelector('input[name="machine"]:checked')?.value || "";
+        if (machine !== "no") fd.delete("buyMachine");
 
-        // Object payload
         const payload = {};
         fd.forEach((v, k) => payload[k] = v);
-        payload.ts = new Date().toISOString();
-        payload.lang = (localStorage.getItem("GINSENG_LANG") || document.documentElement.lang || "vi");
+
+        payload.lang = "vi";
+        payload.client_ts = new Date().toISOString();
 
         try {
-          // optional: falls du später in app.js eine save/submit Funktion hast
-          if (typeof window.Ginseng.submitSurvey === "function") {
+          if (window.Ginseng && typeof window.Ginseng.submitSurvey === "function") {
             await window.Ginseng.submitSurvey(payload);
-          } else if (typeof window.Ginseng.saveSurvey === "function") {
-            await window.Ginseng.saveSurvey(payload);
           } else {
             localStorage.setItem("ginseng_pilot_last_submission", JSON.stringify(payload));
           }
@@ -520,11 +294,7 @@ const testerId = await ensureLiveTesterId(payload.meta_city);
           window.location.href = "thanks.html";
         } catch (err) {
           console.error(err);
-          alert(window.Ginseng.t({
-            de: "Senden hat nicht geklappt. Bitte versuche es erneut.",
-            vi: "Gửi không thành công. Vui lòng thử lại.",
-            en: "Submit failed. Please try again."
-          }));
+          alert("Gửi không thành công. Vui lòng thử lại.");
         }
       });
     });
