@@ -2,9 +2,14 @@
   const KEY = "GINSENG_LANG";
   const DEFAULT_LANG = "vi";
 
-  function getLang() {
-    return localStorage.getItem(KEY) || DEFAULT_LANG;
-  }
+function getLang() {
+  const saved = localStorage.getItem(KEY);
+  if (!saved) return DEFAULT_LANG;
+
+  // Wenn du Vietnam als Primärmarkt willst:
+  return saved === "de" ? "vi" : saved;
+}
+
 
   function setLang(lang) {
     localStorage.setItem(KEY, lang);
