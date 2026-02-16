@@ -3,94 +3,42 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Thanks – TS Hong Shot</title>
-  <link rel="stylesheet" href="app.css"/>
+  <title>Cảm ơn bạn – TS Hong Shot</title>
+  <link rel="stylesheet" href="../app.css"/>
+
+  <!-- Auto redirect -->
+  <meta http-equiv="refresh" content="6;url=../index.html" />
 </head>
+
 <body>
   <div class="wrap">
-    <div class="row">
-      <div class="small" data-de="Fertig" data-vi="Hoàn tất" data-en="Done"></div>
-      <div class="lang">
-        <button id="btnDe" type="button">🇩🇪</button>
-        <button id="btnVi" type="button">🇻🇳</button>
-        <button id="btnEn" type="button">🇬🇧</button>
-      </div>
-    </div>
-
     <div class="card">
-      <h1 data-de="Danke!"
-          data-vi="Cảm ơn bạn!"
-          data-en="Thank you!"></h1>
 
-      <p data-de="Du hast die Umfrage abgeschlossen."
-         data-vi="Bạn đã hoàn thành khảo sát."
-         data-en="You have completed the survey."></p>
+      <h1 style="margin-bottom:10px;">Cảm ơn bạn! ❤️</h1>
 
-      <h2 data-de="Gutschein-Code"
-          data-vi="Mã ưu đãi"
-          data-en="Voucher code"></h2>
+      <p style="margin-bottom:14px;">
+        Cảm ơn bạn đã tham gia khảo sát thử nghiệm tại Đà Lạt.
+      </p>
 
-      <div class="code">
-        <span id="voucher">PILOT10</span>
-        <button type="button"
-                id="copyBtn"
-                data-de="Kopieren"
-                data-vi="Sao chép"
-                data-en="Copy"></button>
-      </div>
+      <p style="margin-bottom:14px;">
+        Để biết thêm thông tin về sản phẩm, vui lòng xem trang chủ sau.
+      </p>
 
-      <p class="small"
-         data-de="Code gilt beim Produktstart (10er-Pack)."
-         data-vi="Mã dùng khi sản phẩm ra mắt (hộp 10 viên)."
-         data-en="Code valid at product launch (10-pack)."></p>
+      <p style="opacity:.8;margin-bottom:14px;">
+        Tự động quay về trang chủ sau <b>6 giây</b>...
+      </p>
 
-      <!-- WICHTIG: Zurück zur Homepage -->
-      <a class="btn"
-         id="backBtn"
-         href="/#trust"
-         data-de="Zur Homepage"
-         data-vi="Về trang chủ"
-         data-en="Back to homepage"></a>
+      <a class="btn primary" href="../index.html">
+        Về trang chủ ngay
+      </a>
 
-      <p class="small"
-         style="opacity:.75;margin-top:10px"
-         data-de="Du wirst automatisch zur Homepage zurückgeleitet."
-         data-vi="Bạn sẽ được tự động chuyển về trang chủ."
-         data-en="You will be redirected to the homepage automatically."></p>
     </div>
   </div>
 
-  <script src="app.js"></script>
   <script>
-    // Sprache initialisieren
-    Ginseng.initLangButtons();
-    Ginseng.renderI18n();
-
-    // Gutschein kopieren
-    const copyBtn = document.getElementById("copyBtn");
-    if (copyBtn) {
-      copyBtn.addEventListener("click", () => {
-        Ginseng.copyToClipboard(
-          document.getElementById("voucher").textContent
-        );
-        alert(Ginseng.t({
-          de: "Code kopiert!",
-          vi: "Đã sao chép mã!",
-          en: "Code copied!"
-        }));
-      });
-    }
-
-    // Sicherheit: immer zur Homepage
-   const homeTarget = "/#trust"; // oder "/#survey"
-
-    const backBtn = document.getElementById("backBtn");
-    if (backBtn) backBtn.href = homeTarget;
-
     setTimeout(() => {
-    window.location.href = homeTarget;
+      window.location.href = "../index.html";
     }, 6000);
-
   </script>
 </body>
 </html>

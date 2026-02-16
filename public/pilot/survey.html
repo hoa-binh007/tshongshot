@@ -32,98 +32,123 @@
 
       <form id="surveyForm" novalidate>
 
-        <!-- Q0 -->
-        <div class="card">
-          <h3>0. Bạn đã từng uống Hồng Sâm (Nhân sâm đỏ Hàn Quốc) chưa?</h3>
-          <label><input type="radio" name="ginsengExperience" value="never" required> Chưa bao giờ</label><br>
-          <label><input type="radio" name="ginsengExperience" value="1-2"> Đã uống 1–2 lần</label><br>
-          <label><input type="radio" name="ginsengExperience" value="often"> Uống thường xuyên</label>
-        </div>
+     <!-- Q0 -->
+<div class="card">
+  <h3>0. Bạn đã từng uống Hồng Sâm (Nhân sâm đỏ Hàn Quốc) chưa?</h3>
+  <label><input type="radio" name="ginsengExperience" value="never" required> Chưa bao giờ</label><br>
+  <label><input type="radio" name="ginsengExperience" value="1-2"> Đã uống 1–2 lần</label><br>
+  <label><input type="radio" name="ginsengExperience" value="often"> Uống thường xuyên</label>
+</div>
 
-        <!-- 1 -->
-        <div class="card">
-          <h3>1. Hương vị</h3>
-          <label><input type="radio" name="taste" value="5" required> Rất ngon</label><br>
-          <label><input type="radio" name="taste" value="4"> Ngon</label><br>
-          <label><input type="radio" name="taste" value="3"> Bình thường</label><br>
-          <label><input type="radio" name="taste" value="2"> Không ngon</label><br>
-          <label><input type="radio" name="taste" value="1"> Rất khó uống</label>
-        </div>
+<!-- 1 -->
+<div class="card">
+  <h3>1. Sau khi uống 1 phần thử (1 ly tiêu chuẩn), bạn đánh giá hương vị như thế nào?</h3>
+  <label><input type="radio" name="taste" value="5" required> Rất ngon</label><br>
+  <label><input type="radio" name="taste" value="4"> Ngon</label><br>
+  <label><input type="radio" name="taste" value="3"> Bình thường</label><br>
+  <label><input type="radio" name="taste" value="2"> Không ngon</label><br>
+  <label><input type="radio" name="taste" value="1"> Rất khó uống</label>
+</div>
 
-        <!-- 2 -->
-        <div class="card">
-          <h3>2. Sau khi uống bạn có thấy tỉnh táo hơn?</h3>
-          <label><input type="radio" name="energy" value="yes" required> Có</label><br>
-          <label><input type="radio" name="energy" value="little"> Một chút</label><br>
-          <label><input type="radio" name="energy" value="no"> Không</label><br>
-          <label><input type="radio" name="energy" value="unsure"> Không chắc</label>
-        </div>
+<!-- 2 -->
+<div class="card">
+  <h3>2. Theo bạn, Hồng Sâm Hàn Quốc có vai trò như thế nào trong văn hóa và sức khỏe của người Việt?</h3>
+  <label><input type="radio" name="culturalValue" value="very_important" required> Rất quan trọng</label><br>
+  <label><input type="radio" name="culturalValue" value="important"> Quan trọng</label><br>
+  <label><input type="radio" name="culturalValue" value="normal"> Bình thường</label><br>
+  <label><input type="radio" name="culturalValue" value="not_important"> Không quan trọng</label>
+</div>
 
-        <!-- 3 -->
-        <div class="card">
-          <h3>3. Bạn có uống thay cà phê không?</h3>
-          <label><input type="radio" name="replaceCoffee" value="yes" required> Có</label><br>
-          <label><input type="radio" name="replaceCoffee" value="sometimes"> Thỉnh thoảng</label><br>
-          <label><input type="radio" name="replaceCoffee" value="no"> Không</label>
-        </div>
 
-        <!-- 4 -->
-        <div class="card">
-          <h3>4. Nếu sản phẩm này có sẵn tại cửa hàng/siêu thị, bạn có mua không?</h3>
-          <label><input type="radio" name="buyIntent" value="yes" required> Chắc chắn mua</label><br>
-          <label><input type="radio" name="buyIntent" value="maybe"> Có thể mua</label><br>
-          <label><input type="radio" name="buyIntent" value="no"> Không mua</label>
-        </div>
 
-        <!-- 5 (Preis für 1 ly) -->
-        <div class="card">
-          <h3>5. Với chất lượng Hồng Sâm Hàn Quốc chính hãng, mức giá nào sau đây cho 1 ly là hợp lý?</h3>
-          <label><input type="radio" name="price" value="<35000" required> Dưới 35.000 VNĐ</label><br>
-          <label><input type="radio" name="price" value="35000-45000"> 35.000 – 45.000 VNĐ</label><br>
-          <label><input type="radio" name="price" value="45000-55000"> 45.000 – 55.000 VNĐ</label><br>
-          <label><input type="radio" name="price" value=">55000"> Trên 55.000 VNĐ</label>
-        </div>
+<!-- 3 -->
+<div class="card">
+  <h3>3. Bạn nghĩ sản phẩm này phù hợp nhất trong tình huống nào?</h3>
+  <label><input type="radio" name="usageFit" value="work" required> Khi làm việc / cần tập trung</label><br>
+  <label><input type="radio" name="usageFit" value="health"> Khi muốn bồi bổ sức khỏe</label><br>
+  <label><input type="radio" name="usageFit" value="relax"> Khi thư giãn</label><br>
+  <label><input type="radio" name="usageFit" value="gift"> Làm quà tặng</label><br>
+  <label><input type="radio" name="usageFit" value="unsure"> Chưa rõ</label>
+</div>
 
-        <!-- 6 -->
-        <div class="card">
-          <h3>6. Bạn có máy pha viên nén (ví dụ: Dolce Gusto)?</h3>
-          <label><input type="radio" name="machine" value="yes" required> Có</label><br>
-          <label><input type="radio" name="machine" value="no"> Không</label>
 
-          <div id="machineFollowUp" style="display:none; margin-top:10px;">
-            <p>Nếu không, bạn có sẵn sàng mua máy?</p>
-            <label><input type="radio" name="buyMachine" value="yes"> Có</label><br>
-            <label><input type="radio" name="buyMachine" value="maybe"> Có thể</label><br>
-            <label><input type="radio" name="buyMachine" value="no"> Không</label>
-          </div>
-        </div>
+<!-- 4 (Machine barrier + 2.8tr hint) -->
+<div class="card">
+  <h3>4. Bạn có máy pha viên nén (ví dụ: Dolce Gusto) không?</h3>
+  <p style="margin:6px 0 10px; opacity:.85;">
+    (Giá máy khoảng 2,8 triệu VNĐ)
+  </p>
+  <label><input type="radio" name="machine" value="have" required> Đã có máy</label><br>
+  <label><input type="radio" name="machine" value="buy"> Sẽ mua máy</label><br>
+  <label><input type="radio" name="machine" value="no"> Không muốn mua máy</label>
+</div>
 
-        <!-- 7 -->
-        <div class="card">
-          <h3>7. Khi nào bạn sẽ uống? (Có thể chọn nhiều đáp án)</h3>
-          <label><input type="checkbox" name="when" value="morning"> Buổi sáng</label><br>
-          <label><input type="checkbox" name="when" value="work"> Làm việc / Học tập</label><br>
-          <label><input type="checkbox" name="when" value="sport"> Trước hoặc sau tập thể thao</label><br>
-          <label><input type="checkbox" name="when" value="evening"> Buổi tối</label><br>
-          <label><input type="checkbox" name="when" value="unsure"> Chưa rõ</label>
-        </div>
+<!-- 5 -->
+<div class="card">
+  <h3>5. Nếu viên nén được bán tại siêu thị/cửa hàng, bạn có mua không? Mục đích mua hàng của bạn là gì? </h3>
 
-        <!-- 8 -->
-        <div class="card">
-          <h3>8. Độ tuổi</h3>
-          <label><input type="radio" name="age" value="18-25" required> 18–25</label><br>
-          <label><input type="radio" name="age" value="26-35"> 26–35</label><br>
-          <label><input type="radio" name="age" value="36-50"> 36–50</label><br>
-          <label><input type="radio" name="age" value="50+"> Trên 50</label>
-        </div>
+  <label>
+    <input type="radio" name="buyIntent" value="yes" required>
+    Chắc chắn mua (để sử dụng cho bản thân)
+  </label><br>
 
-        <!-- 9 -->
-        <div class="card">
-          <h3>9. Bạn có giới thiệu cho bạn bè?</h3>
-          <label><input type="radio" name="recommend" value="yes" required> Có</label><br>
-          <label><input type="radio" name="recommend" value="maybe"> Có thể</label><br>
-          <label><input type="radio" name="recommend" value="no"> Không</label>
-        </div>
+  <label>
+    <input type="radio" name="buyIntent" value="gift">
+    Chắc chắn mua (để làm quà tặng)
+  </label><br>
+
+  <label>
+    <input type="radio" name="buyIntent" value="maybe_self">
+    Có thể mua (cho bản thân)
+  </label><br>
+
+  <label>
+    <input type="radio" name="buyIntent" value="maybe_gift">
+    Có thể mua (làm quà)
+  </label><br>
+
+  <label>
+    <input type="radio" name="buyIntent" value="no">
+    Không mua
+  </label>
+</div>
+
+
+<!-- 6 (Price home) -->
+<div class="card">
+  <h3>6. Với chất lượng Hồng Sâm Hàn Quốc chính hãng, mức giá nào sau đây cho 1 ly là hợp lý?</h3>
+  <label><input type="radio" name="price" value="<35000" required> Dưới 35.000 VNĐ</label><br>
+  <label><input type="radio" name="price" value="35000-45000"> 35.000 – 45.000 VNĐ</label><br>
+  <label><input type="radio" name="price" value="45000-55000"> 45.000 – 55.000 VNĐ</label><br>
+  <label><input type="radio" name="price" value=">55000"> Trên 55.000 VNĐ</label>
+</div>
+
+<!-- 7 (Street model) -->
+<div class="card">
+  <h3>7. Nếu được pha sẵn và bán tại quầy/xe đẩy ngoài đường, bạn có chấp nhận giá trên 55.000 VNĐ cho 1 ly không?</h3>
+  <label><input type="radio" name="streetPrice55" value="yes" required> Có</label><br>
+  <label><input type="radio" name="streetPrice55" value="maybe"> Có thể</label><br>
+  <label><input type="radio" name="streetPrice55" value="no"> Không</label>
+</div>
+
+<!-- 8 (Belief in long-term use) -->
+<div class="card">
+  <h3>8. Bạn có tin rằng nếu sử dụng thường xuyên, sản phẩm này sẽ mang lại lợi ích cho sức khỏe và năng lượng của bạn không?</h3>
+  <label><input type="radio" name="belief" value="yes" required> Tin tưởng</label><br>
+  <label><input type="radio" name="belief" value="maybe"> Có thể</label><br>
+  <label><input type="radio" name="belief" value="no"> Không tin</label>
+</div>
+
+<!-- 9 -->
+<div class="card">
+  <h3>9. Độ tuổi</h3>
+  <label><input type="radio" name="age" value="18-25" required> 18–25</label><br>
+  <label><input type="radio" name="age" value="26-35"> 26–35</label><br>
+  <label><input type="radio" name="age" value="36-50"> 36–50</label><br>
+  <label><input type="radio" name="age" value="50+"> Trên 50</label>
+</div>
+
+
 
         <!-- Feedback -->
         <div class="card">
