@@ -104,6 +104,36 @@ label {
   cursor: pointer;
 }
 
+/* === Klassische schwarze Radio Buttons === */
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  margin-right: 12px;
+  position: relative;
+  top: 4px;
+  cursor: pointer;
+  background: #fff;
+}
+
+input[type="radio"]:checked::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+label {
+  cursor: pointer;
+}
 
   </style>
 
