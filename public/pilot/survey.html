@@ -4,15 +4,32 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Khảo sát Hong Shot (Đà Lạt)</title>
-  <link rel="stylesheet" href="app.css"/>
+  
 
   <style>
+    html, body {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.wrap, .card {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+* {
+  color: #000000 !important;
+}
+
     .card { margin-bottom: 14px; }
     .row { display:flex; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap; }
     .btn.primary { cursor:pointer; }
     .hero { width:100%; height:auto; border-radius:14px; display:block; margin:0 0 12px 0; }
     .small { opacity:.85; font-size:.95rem; }
   </style>
+
+  
+
 </head>
 
 <body>
@@ -131,15 +148,7 @@
   <label><input type="radio" name="streetPrice55" value="no"> Không</label>
 </div>
 
-<!-- 8 (Belief in long-term use) -->
-<div class="card">
-  <h3>8. Bạn có tin rằng nếu sử dụng thường xuyên, sản phẩm này sẽ mang lại lợi ích cho sức khỏe và năng lượng của bạn không?</h3>
-  <label><input type="radio" name="belief" value="yes" required> Tin tưởng</label><br>
-  <label><input type="radio" name="belief" value="maybe"> Có thể</label><br>
-  <label><input type="radio" name="belief" value="no"> Không tin</label>
-</div>
-
-<!-- 9 -->
+<!-- 8-->
 <div class="card">
   <h3>9. Độ tuổi</h3>
   <label><input type="radio" name="age" value="18-25" required> 18–25</label><br>
