@@ -69,6 +69,42 @@ input[type="radio"], input[type="checkbox"]{
   margin-right: 10px;
 }
 
+/* === Custom Radio Buttons – klar & deutlich === */
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+  background: #fff;
+}
+
+input[type="radio"]:checked {
+  border: 2px solid #000;
+}
+
+input[type="radio"]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+label {
+  cursor: pointer;
+}
+
+
   </style>
 
   
