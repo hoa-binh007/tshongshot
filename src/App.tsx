@@ -452,17 +452,18 @@ export default function App() {
               </h2>
 
               <div className="card ingCard">
+
                 <div className="videoFrame">
-                  <video
-                    className="video"
-                    poster="/media/poster-unboxing.jpg"
-                    controls
-                    playsInline
-                    preload="metadata"
-                  >
-                    <source src="/media/optimized/unboxing.mp4" type="video/mp4" />
-                  </video>
-                </div>
+            <iframe
+              className="video"
+              src="https://www.youtube.com/embed/dMJw2ix7vW0"
+              title="Dolce Gusto Unboxing"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+
 
                 <div className="muted" style={{ marginTop: 10 }}>
                   {lang === "de"
