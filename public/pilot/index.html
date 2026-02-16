@@ -3,47 +3,59 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Ginseng Pilot</title>
+  <title>Khảo sát Hong Shot – Đà Lạt</title>
   <link rel="stylesheet" href="app.css"/>
+
+  <style>
+    .hero {
+      width:100%;
+      height:auto;
+      border-radius:14px;
+      margin-bottom:16px;
+    }
+
+    .card {
+      margin-bottom:16px;
+    }
+
+    .note {
+      background:rgba(255,255,255,0.05);
+      padding:12px;
+      border-radius:10px;
+      margin:14px 0;
+      font-size:0.95rem;
+      opacity:0.9;
+    }
+
+    .btn.primary {
+      display:inline-block;
+      margin-top:10px;
+    }
+  </style>
 </head>
+
 <body>
   <div class="wrap">
-    <div class="row">
-      <div class="small" data-de="Pilot-Umfrage" data-vi="Khảo sát Pilot" data-en="Pilot Survey"></div>
-      <div class="lang">
-        <button id="btnDe" type="button">🇩🇪</button>
-        <button id="btnVi" type="button">🇻🇳</button>
-        <button id="btnEn" type="button">🇬🇧</button>
-      </div>
-    </div>
-
     <div class="card">
-      <h1 data-de="Koreanischer Roter Ginseng – Schnelles Feedback"
-          data-vi="Trà Hồng Sâm – Góp ý nhanh"
-          data-en="Korean Red Ginseng – Quick Feedback"></h1>
 
-      <p data-de="Danke fürs Probieren. Anonyme Umfrage, ca. 3 Minuten."
-         data-vi="Cảm ơn bạn đã dùng thử. Khảo sát ẩn danh, trả lời nhanh ~3 phút."
-         data-en="Thanks for trying it. Anonymous survey, ~3 minute."></p>
+      <!-- Banner -->
+      <img class="hero" src="../media/hongshot_header.jpg" alt="Hong Shot">
+
+      <h1>Khảo sát nhanh – Hong Shot (Đà Lạt)</h1>
+
+      <p>
+        Cảm ơn bạn đã dùng thử Hong Shot hôm nay.
+        Khảo sát ẩn danh – chỉ mất khoảng 30–60 giây.
+      </p>
 
       <div class="note">
-        <div data-de="Hinweis: Es kann leicht bitter sein, danach leicht süß und ggf. mehr Speichel. Jeder nimmt es anders wahr."
-             data-vi="Gợi ý: có thể đắng nhẹ, sau đó ngọt nhẹ và nhiều nước bọt. Mỗi người cảm nhận khác nhau."
-             data-en="Note: it may feel slightly bitter, then a mild sweet aftertaste and more saliva. Perception differs."></div>
+        Lưu ý: Phần thử hôm nay chỉ khoảng 20–60ml
+        (tương đương 1–3 ngụm nhỏ).
       </div>
 
-      <a class="btn" id="startBtn" href="survey.html"
-         data-de="Umfrage starten"
-         data-vi="Bắt đầu khảo sát"
-         data-en="Start survey"></a>
+      <!-- TODO: Form / câu hỏi sẽ đặt ở đây -->
 
-      <p class="small"
-         data-de="Keine richtigen/falschen Antworten. Einfach schnell tippen."
-         data-vi="Không có đúng/sai. Chỉ cần chọn nhanh."
-         data-en="No right/wrong answers. Just tap quickly."></p>
     </div>
   </div>
-
-  <script src="app.js"></script>
 </body>
 </html>
