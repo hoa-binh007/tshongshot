@@ -3,42 +3,38 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Cảm ơn bạn – TS Hong Shot</title>
-  <link rel="stylesheet" href="../app.css"/>
-
-  <!-- Auto redirect -->
-  <meta http-equiv="refresh" content="6;url=../index.html" />
+  <title>Hoàn tất – Hong Shot</title>
+  <link rel="stylesheet" href="app.css"/>
+  <style>
+    .card { margin-bottom: 14px; }
+    .small { opacity:.8; }
+  </style>
 </head>
-
 <body>
   <div class="wrap">
     <div class="card">
+      <h1>Cảm ơn bạn!</h1>
+      <p>Bạn đã hoàn thành khảo sát.</p>
 
-      <h1 style="margin-bottom:10px;">Cảm ơn bạn! ❤️</h1>
+      <p class="small">Để biết thêm thông tin, vui lòng xem trang chủ.</p>
 
-      <p style="margin-bottom:14px;">
-        Cảm ơn bạn đã tham gia khảo sát thử nghiệm tại Đà Lạt.
+      <a class="btn" id="backBtn" href="../index.html">Về trang chủ</a>
+
+      <p class="small" style="margin-top:10px;">
+        Bạn sẽ được tự động chuyển về trang chủ trong vài giây…
       </p>
-
-      <p style="margin-bottom:14px;">
-        Để biết thêm thông tin về sản phẩm, vui lòng xem trang chủ sau.
-      </p>
-
-      <p style="opacity:.8;margin-bottom:14px;">
-        Tự động quay về trang chủ sau <b>6 giây</b>...
-      </p>
-
-      <a class="btn primary" href="../index.html">
-        Về trang chủ ngay
-      </a>
-
     </div>
   </div>
 
   <script>
+    // Immer korrekt auf Homepage (funktioniert lokal + später auf Hosting)
+    const homeUrl = new URL("../index.html", window.location.href).href;
+    const backBtn = document.getElementById("backBtn");
+    if (backBtn) backBtn.href = homeUrl;
+
     setTimeout(() => {
-      window.location.href = "../index.html";
-    }, 6000);
+      window.location.href = homeUrl;
+    }, 2500);
   </script>
 </body>
 </html>
