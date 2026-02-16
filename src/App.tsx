@@ -633,7 +633,7 @@ export default function App() {
 
           {/* Optional: Button zum Pilot-Survey */}
             <div id="survey" style={{ marginTop: 12 }}>
-            <a className="ctaButton" href="/pilot/index.html">
+            <a className="ctaButton" href="/pilot/survey.html">
             {t("pilot_cta")}
             </a>
           </div>
