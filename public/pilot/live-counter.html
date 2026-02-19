@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hong Shot – Live Counter</title>
+  <style>
+    body{font-family:system-ui;margin:24px}
+    .card{border:1px solid #ddd;border-radius:12px;padding:16px;max-width:520px}
+    .row{display:flex;justify-content:space-between;gap:12px;margin:10px 0}
+    .big{font-size:40px;font-weight:800}
+    .muted{opacity:.7}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="muted">Đà Lạt (DL) – Live</div>
+    <div class="row"><div>Heute total</div><div class="big" id="total">–</div></div>
+    <div class="row"><div>Heute valid</div><div class="big" id="valid">–</div></div>
+    <div class="muted" id="meta">warte auf Daten…</div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "PASTE_HERE",
+      authDomain: "PASTE_HERE",
+      databaseURL: "https://rote-ginseng-vn-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "rote-ginseng-vn",
+      appId: "PASTE_HERE"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const today = new Date().toISOString().slice(0,10);
+    const base = `counters/DL/${today}`;
+
+    const elTotal = document.getElementById("total");
+    const elValid = document.getElementById("valid");
+    const elMeta  = document.getElementById("meta");
+
+    onValue(ref(db, `${base}/total`), (snap) => {
+      elTotal.textContent = snap.exists() ? snap.val() : 0;
+      elMeta.textContent = `Stand: ${new Date().toLocaleTimeString()}`;
+    });
+
+    onValue(ref(db, `${base}/valid`), (snap) => {
+      elValid.textContent = snap.exists() ? snap.val() : 0;
+      elMeta.textContent = `Stand: ${new Date().toLocaleTimeString()}`;
+    });
+  </script>
+</body>
+</html>
