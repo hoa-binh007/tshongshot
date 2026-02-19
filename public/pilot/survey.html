@@ -425,6 +425,10 @@ label {
         payload.lang = "vi";
         payload.client_ts = new Date().toISOString();
 
+        payload.meta_city_code = payload.city || "DL";  // falls du ein city Feld hast
+        payload.meta_city = "DaLat";
+
+
         try {
           if (window.Ginseng && typeof window.Ginseng.submitSurvey === "function") {
             await window.Ginseng.submitSurvey(payload);
@@ -440,5 +444,9 @@ label {
       });
     });
   </script>
+
+  <script type="module" src="./counter-hook.js?v=20260219-1"></script>
+
+
 </body>
 </html>
