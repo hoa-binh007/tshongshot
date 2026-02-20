@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hong Shot – Shift Counter (18–20 Feb)</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial; margin:24px; line-height:1.4;}
+    .card{max-width:980px; padding:18px; border:1px solid #ddd; border-radius:14px;}
+    .row{display:flex; gap:12px; flex-wrap:wrap;}
+    .kpi{flex:1; min-width:220px; padding:14px; border:1px solid #eee; border-radius:12px;}
+    .kpi b{font-size:26px; display:block; margin-top:6px;}
+    .muted{opacity:.75}
+    input{padding:8px 10px; border-radius:10px; border:1px solid #ddd;}
+    button{padding:10px 12px; border-radius:12px; border:1px solid #ddd; cursor:pointer;}
+    table{width:100%; border-collapse:collapse; margin-top:14px;}
+    th,td{border-bottom:1px solid #eee; padding:10px; text-align:left; vertical-align:top;}
+    th{font-weight:700; background:#fafafa;}
+    .tag{display:inline-block; padding:2px 8px; border:1px solid #eee; border-radius:999px; font-size:12px; opacity:.85;}
+    .right{text-align:right;}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Hong Shot – Shift Counter (18–20 Feb)</h1>
+    <p class="muted">Quelle: Firebase Realtime Database → <code>surveys/</code> (abgesendete Antworten). Zeitzone-Auswertung: <b>Asia/Ho_Chi_Minh</b>.</p>
+
+    <div class="row" style="margin:12px 0 18px;">
+      <div>
+        <div class="muted">City Prefix</div>
+        <input id="cityPrefix" value="DL-" />
+      </div>
+      <div>
+        <div class="muted">Tage (fix)</div>
+        <input id="days" value="2026-02-18, 2026-02-19, 2026-02-20" disabled />
+      </div>
+      <div style="align-self:end;">
+        <button id="btnRefresh">Refresh</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="kpi">
+        <div class="muted">Total (18–20) – submitted</div>
+        <b id="kpiAll">–</b>
+      </div>
+      <div class="kpi">
+        <div class="muted">Total (18–20) – valid</div>
+        <b id="kpiValid">–</b>
+      </div>
+      <div class="kpi">
+        <div class="muted">Total (18–20) – outside shifts</div>
+        <b id="kpiOutside">–</b>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Slot</th>
+          <th class="right">submitted</th>
+          <th class="right">valid</th>
+          <th class="right">invalid</th>
+          <th>Hinweis</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <p class="muted" style="margin-top:14px;">
+      Letztes Update: <span id="updated">–</span>
+    </p>
+
+    <p class="muted" style="margin-top:10px;">
+      <span class="tag">Shift 1</span> 11:30–14:00 &nbsp;
+      <span class="tag">Shift 2</span> 17:30–20:00 &nbsp;
+      <span class="tag">Outside</span> alles andere (z. B. 06:00 morgens)
+    </p>
+  </div>
+
+  <script type="module">
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-database.js";
+
+    const FIREBASE_CONFIG = {
+      databaseURL: "https://rote-ginseng-vn-default-rtdb.europe-west1.firebasedatabase.app"
+    };
+
+    // ✅ Deine Valid-Regel (wie bisher)
+    const REQUIRED_FIELDS = [
+      "ginsengExperience",
+      "taste",
+      "culturalValue",
+      "usageFit",
+      "machine",
+      "buyIntent",
+      "price",
+      "streetPrice55",
+      "age"
+    ];
+
+    const TZ = "Asia/Ho_Chi_Minh";
+    const DAYS = ["2026-02-18","2026-02-19","2026-02-20"];
+
+    // Schichten (Minuten seit 00:00)
+    const SHIFT_1 = { name:"Shift 1", start: 11*60+30, end: 14*60 };     // 11:30–14:00
+    const SHIFT_2 = { name:"Shift 2", start: 17*60+30, end: 20*60 };     // 17:30–20:00
+
+    function isValid(p){
+      return REQUIRED_FIELDS.every(k => {
+        const v = p?.[k];
+        return v !== null && v !== undefined && String(v).trim() !== "";
+      });
+    }
+
+    function parseAnyTs(v){
+      if(v === null || v === undefined) return null;
+
+      // number (ms)
+      if(typeof v === "number" && isFinite(v)) return new Date(v);
+
+      // numeric string (ms)
+      if(typeof v === "string" && /^\d{10,}$/.test(v.trim())) {
+        const n = Number(v.trim());
+        if(isFinite(n)) return new Date(n);
+      }
+
+      // "YYYY-MM-DD HH:mm:ss" -> treat as local-like, convert to ISO without timezone
+      if(typeof v === "string" && /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/.test(v.trim())) {
+        // interpret as local time string; create Date from ISO-like (no Z)
+        return new Date(v.trim().replace(" ", "T"));
+      }
+
+      // ISO or Date-parseable
+      if(typeof v === "string") {
+        const d = new Date(v);
+        if(!isNaN(d.getTime())) return d;
+      }
+
+      return null;
+    }
+
+    // nimmt bevorzugt client_ts, dann ts_local, dann ts (falls vorhanden)
+    function getEventDate(payload){
+      return (
+        parseAnyTs(payload?.client_ts) ||
+        parseAnyTs(payload?.ts_local)  ||
+        parseAnyTs(payload?.ts)        || // optional fallback
+        null
+      );
+    }
+
+    function getLocalParts(d){
+      // Liefert { ymd: "YYYY-MM-DD", minutes: 0..1439 } im TZ
+      const fmt = new Intl.DateTimeFormat("en-CA", {
+        timeZone: TZ,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      });
+      const parts = fmt.formatToParts(d).reduce((acc,p)=>{ acc[p.type]=p.value; return acc; }, {});
+      const ymd = `${parts.year}-${parts.month}-${parts.day}`;
+      const minutes = (Number(parts.hour) * 60) + Number(parts.minute);
+      return { ymd, minutes };
+    }
+
+    function slotOf(minutes){
+      const in1 = minutes >= SHIFT_1.start && minutes < SHIFT_1.end;
+      const in2 = minutes >= SHIFT_2.start && minutes < SHIFT_2.end;
+      if(in1) return "shift1";
+      if(in2) return "shift2";
+      return "outside";
+    }
+
+    const app = (getApps().length ? getApps()[0] : initializeApp(FIREBASE_CONFIG));
+    const db = getDatabase(app);
+
+    function makeEmptyStats(){
+      return { all:0, valid:0 };
+    }
+
+    function addStat(stat, isV){
+      stat.all++;
+      if(isV) stat.valid++;
+    }
+
+    function renderRow(tbody, date, label, stat, hint=""){
+      const tr = document.createElement("tr");
+      const invalid = stat.all - stat.valid;
+
+      tr.innerHTML = `
+        <td class="mono">${date}</td>
+        <td>${label}</td>
+        <td class="right mono">${stat.all}</td>
+        <td class="right mono">${stat.valid}</td>
+        <td class="right mono">${invalid}</td>
+        <td class="muted">${hint}</td>
+      `;
+      tbody.appendChild(tr);
+    }
+
+    async function refresh(){
+      const cityPrefix = document.getElementById("cityPrefix").value.trim();
+
+      const snap = await get(ref(db, "surveys"));
+      const data = snap.val() || {};
+
+      // stats[day][slot]
+      const stats = {};
+      for(const day of DAYS){
+        stats[day] = {
+          shift1: makeEmptyStats(),
+          shift2: makeEmptyStats(),
+          outside: makeEmptyStats(),
+          unknownTime: makeEmptyStats(), // falls keine Zeit im payload
+          total: makeEmptyStats(),
+        };
+      }
+
+      let kpiAll = 0, kpiValid = 0, kpiOutside = 0;
+
+      for(const [testerId, payload] of Object.entries(data)){
+        if(!payload || typeof payload !== "object") continue;
+        if(cityPrefix && !testerId.startsWith(cityPrefix)) continue;
+
+        const d = getEventDate(payload);
+        const v = isValid(payload);
+
+        if(!d || isNaN(d.getTime())){
+          // Ohne Zeit: wir können keinen Tag/Slot sicher zuordnen -> ignorieren wir NICHT,
+          // aber zählen es nur, wenn du willst. Hier: wir zählen es nicht in 18–20 rein.
+          continue;
+        }
+
+        const { ymd, minutes } = getLocalParts(d);
+        if(!DAYS.includes(ymd)) continue; // nur 18–20
+
+        const slot = slotOf(minutes);
+
+        addStat(stats[ymd][slot], v);
+        addStat(stats[ymd].total, v);
+
+        kpiAll++;
+        if(v) kpiValid++;
+        if(slot === "outside") kpiOutside++;
+      }
+
+      // KPI
+      document.getElementById("kpiAll").textContent = String(kpiAll);
+      document.getElementById("kpiValid").textContent = String(kpiValid);
+      document.getElementById("kpiOutside").textContent = String(kpiOutside);
+
+      // Tabelle rendern
+      const tbody = document.getElementById("tbody");
+      tbody.innerHTML = "";
+
+      for(const day of DAYS){
+        renderRow(tbody, day, "Shift 1 (11:30–14:00)", stats[day].shift1, "geplante Schicht");
+        renderRow(tbody, day, "Shift 2 (17:30–20:00)", stats[day].shift2, "geplante Schicht");
+        renderRow(tbody, day, "Outside shifts", stats[day].outside, "z. B. morgens ab 06:00, nach 20:00, etc.");
+        renderRow(tbody, day, "TOTAL (day)", stats[day].total, "Summe des Tages");
+      }
+
+      document.getElementById("updated").textContent = new Date().toLocaleString("de-DE");
+    }
+
+    document.getElementById("btnRefresh").addEventListener("click", refresh);
+    refresh();
+    setInterval(refresh, 30000);
+  </script>
+</body>
+</html>
