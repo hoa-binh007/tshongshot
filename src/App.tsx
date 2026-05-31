@@ -353,11 +353,7 @@ export default function App() {
                   onClick={startPrepVideo}
                   aria-label="Play preparation video"
                 >
-                  <img
-                    src="/media/poster-prep.jpg"
-                    alt="Preparation preview"
-                    loading="eager"
-                  />
+                  <img src="/media/poster-prep.jpg" alt="Preparation preview" loading="eager" />
                   <span className="videoPlayIcon" aria-hidden="true">
                     ▶
                   </span>
@@ -445,79 +441,72 @@ export default function App() {
         </section>
 
         {/* UNBOXING */}
-          <section className="section" id="unboxing">
-            <div className="container">
-              <h2 className="sectionTitle">
-                {lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}
-              </h2>
+        <section className="section" id="unboxing">
+          <div className="container">
+            <h2 className="sectionTitle">
+              {lang === "de" ? "Unboxing" : lang === "vi" ? "Mở hộp" : "Unboxing"}
+            </h2>
 
-              <div className="card ingCard">
+            <div className="card ingCard">
+              <div className="videoFrame">
+                <iframe
+                  className="video"
+                  src="https://www.youtube.com/embed/dMJw2ix7vW0"
+                  title="Dolce Gusto Unboxing"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
 
-                <div className="videoFrame">
-            <iframe
-              className="video"
-              src="https://www.youtube.com/embed/dMJw2ix7vW0"
-              title="Dolce Gusto Unboxing"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-
-
-                <div className="muted" style={{ marginTop: 10 }}>
-                  {lang === "de"
-                    ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."
-                    : lang === "vi"
-                    ? "Cảm giác mở hộp – bao bì & trải nghiệm sản phẩm."
-                    : "A quick look at the unboxing – packaging & product feel."}
-                </div>
+              <div className="muted" style={{ marginTop: 10 }}>
+                {lang === "de"
+                  ? "Ein kurzer Eindruck vom Auspacken – Verpackung & Produktgefühl."
+                  : lang === "vi"
+                  ? "Cảm giác mở hộp – bao bì & trải nghiệm sản phẩm."
+                  : "A quick look at the unboxing – packaging & product feel."}
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
         {/* TRUST */}
-          <section id="trust" className="section trust">
-            <div className="container">
-              <h2 className="sectionTitle">
-                {lang === "de"
-                  ? "Roter Ginseng – weltweit geschätzt"
+        <section id="trust" className="section trust">
+          <div className="container">
+            <h2 className="sectionTitle">
+              {lang === "de"
+                ? "Roter Ginseng – weltweit geschätzt"
+                : lang === "vi"
+                ? "Hồng sâm – được tin dùng trên toàn cầu"
+                : "Red Ginseng – trusted worldwide"}
+            </h2>
+
+            <p className="sectionText">
+              {lang === "de"
+                ? "Panax Ginseng wird seit Langem in hochwertigen Produkten eingesetzt – von Hautpflege bis zu Vital- und Konzentrationspräparaten. Hong Shot bringt diesen bewährten Wirkstoff als praktisches Kapsel-Getränk in den Alltag."
+                : lang === "vi"
+                ? "Panax ginseng từ lâu đã được ứng dụng trong nhiều sản phẩm chất lượng cao – từ chăm sóc da đến các sản phẩm hỗ trợ năng lượng & tập trung. Hong Shot đưa hoạt chất quen thuộc này vào dạng đồ uống viên nang – tiện và dễ định lượng."
+                : "Panax ginseng has long been used in high-quality products—from skincare to vitality and focus supplements. Hong Shot brings this proven ingredient into a practical capsule drink for daily routines."}
+            </p>
+
+            <img
+              src="/media/trust-ginseng.png"
+              alt={
+                lang === "de"
+                  ? "Ginseng: Anwendungen und Zubereitung als Kapsel-Getränk"
                   : lang === "vi"
-                  ? "Hồng sâm – được tin dùng trên toàn cầu"
-                  : "Red Ginseng – trusted worldwide"}
-              </h2>
+                  ? "Hồng sâm: ứng dụng và cách pha đồ uống viên nang"
+                  : "Ginseng: applications and capsule drink preparation"
+              }
+              className="trustImage"
+              loading="lazy"
+            />
 
-              <p className="sectionText">
-                {lang === "de"
-                  ? "Panax Ginseng wird seit Langem in hochwertigen Produkten eingesetzt – von Hautpflege bis zu Vital- und Konzentrationspräparaten. Hong Shot bringt diesen bewährten Wirkstoff als praktisches Kapsel-Getränk in den Alltag."
-                  : lang === "vi"
-                  ? "Panax ginseng từ lâu đã được ứng dụng trong nhiều sản phẩm chất lượng cao – từ chăm sóc da đến các sản phẩm hỗ trợ năng lượng & tập trung. Hong Shot đưa hoạt chất quen thuộc này vào dạng đồ uống viên nang – tiện và dễ định lượng."
-                  : "Panax ginseng has long been used in high-quality products—from skincare to vitality and focus supplements. Hong Shot brings this proven ingredient into a practical capsule drink for daily routines."}
-              </p>
-
-              <img
-                src="/media/trust-ginseng.png"
-                alt={
-                  lang === "de"
-                    ? "Ginseng: Anwendungen und Zubereitung als Kapsel-Getränk"
-                    : lang === "vi"
-                    ? "Hồng sâm: ứng dụng và cách pha đồ uống viên nang"
-                    : "Ginseng: applications and capsule drink preparation"
-                }
-                className="trustImage"
-                loading="lazy"
-              />
-
-
-            
-
-          {/* ✅ MORE INFO: 3 mini cards */}
+            {/* ✅ MORE INFO: 3 mini cards */}
             <div className="trustGrid">
               <div className="trustCard">
                 <div className="trustIcon">✨</div>
-                <h3>
-                  {lang === "de" ? "Premium-Hautpflege" : lang === "vi" ? "Chăm sóc da cao cấp" : "Premium skincare"}
-                </h3>
+                <h3>{lang === "de" ? "Premium-Hautpflege" : lang === "vi" ? "Chăm sóc da cao cấp" : "Premium skincare"}</h3>
                 <p>
                   {lang === "de"
                     ? "Ginseng ist in vielen Formeln als revitalisierender Wirkstoff bekannt."
@@ -529,9 +518,7 @@ export default function App() {
 
               <div className="trustCard">
                 <div className="trustIcon">🧠</div>
-                <h3>
-                  {lang === "de" ? "Fokus & Energie" : lang === "vi" ? "Tập trung & năng lượng" : "Focus & energy"}
-                </h3>
+                <h3>{lang === "de" ? "Fokus & Energie" : lang === "vi" ? "Tập trung & năng lượng" : "Focus & energy"}</h3>
                 <p>
                   {lang === "de"
                     ? "Oft genutzt in Vital-Komplexen – z.B. kombiniert mit B-Vitaminen und Zink."
@@ -543,9 +530,7 @@ export default function App() {
 
               <div className="trustCard">
                 <div className="trustIcon">☕</div>
-                <h3>
-                  {lang === "de" ? "Als Kapsel-Drink" : lang === "vi" ? "Dạng đồ uống viên nang" : "As a capsule drink"}
-                </h3>
+                <h3>{lang === "de" ? "Als Kapsel-Drink" : lang === "vi" ? "Dạng đồ uống viên nang" : "As a capsule drink"}</h3>
                 <p>
                   {lang === "de"
                     ? "Praktisch im Alltag: klare Portionierung und schnelle Zubereitung."
@@ -566,7 +551,7 @@ export default function App() {
           </div>
         </section>
 
-      {/* FAQ */}
+        {/* FAQ */}
         <section className="section" id="faq">
           <div className="container">
             <h2 className="sectionTitle">{t("faq_title")}</h2>
@@ -631,13 +616,23 @@ export default function App() {
               );
             })()}
 
-          {/* Optional: Button zum Pilot-Survey */}
-            <div id="survey" style={{ marginTop: 12 }}>
-            <a className="ctaButton" href="/pilot/survey.html">
-            {t("pilot_cta")}
-            </a>
-          </div>
+            <div id="survey" style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 12 }}>
+              <a className="ctaButton" href="/pilot/survey.html">
+                {lang === "de"
+                  ? "Konsumenten-Umfrage öffnen"
+                  : lang === "vi"
+                  ? "Mở khảo sát người tiêu dùng"
+                  : "Open consumer survey"}
+              </a>
 
+              <a className="ctaButton" href="/research/b2b.html">
+                {lang === "de"
+                  ? "B2B-Interview öffnen"
+                  : lang === "vi"
+                  ? "Mở phỏng vấn B2B"
+                  : "Open B2B interview"}
+              </a>
+            </div>
           </div>
         </section>
       </main>
